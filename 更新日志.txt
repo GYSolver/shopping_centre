@@ -1,0 +1,20 @@
+V0.1 开发后台基本功能
+2020/7/21
+1.数据库建表——user, role
+2.使用shiro框架基本完成用户认证，角色授权
+
+2020/7/25
+3.数据库建表——product, product_detail, category
+4.类目增删改查
+
+v0.2
+2020/7/26
+4.完成后台Category开发
+5.替换thymeleaf公共模板
+
+7/28
+6.Product Category 多对一关系：首先实体类增加另外表的字段，其次MybatisPlus Mapper中自定义方法和SQL（Join）和ResultMap
+
+v1.1 开发前台基本功能
+7/28
+1.

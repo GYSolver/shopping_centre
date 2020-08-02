@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soton.shopping_centre.mapper.ProductMapper">
+    <resultMap id="productMap" type="com.soton.shopping_centre.pojo.Product">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="brand" property="brand"/>
+        <result column="imagePath" property="imagePath"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <association  column="category_id" property="category" select="com.soton.shopping_centre.mapper.CategoryMapper.selectById"/>
+    </resultMap>
+    <select id="selectProductById" resultMap="productMap">
+        select * from product left join category on product.category_id=category.id where product.id=#{id}
+    </select>
+
+</mapper>

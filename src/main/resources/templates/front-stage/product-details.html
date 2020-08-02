@@ -1,0 +1,643 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="front-stage/images/favicon.ico">
+
+    <!-- CSS
+	============================================ -->
+
+    <!-- Vendor CSS (Bootstrap & Icon Font) -->
+    <!-- <link rel="stylesheet" href="front-stage/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="front-stage/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="front-stage/css/vendor/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="front-stage/css/vendor/animate.min.css"> -->
+    <!-- Plugins CSS (All Plugins Files) -->
+    <!-- <link rel="stylesheet" href="front-stage/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="front-stage/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="front-stage/css/plugins/plugins.css">
+    <link rel="stylesheet" href="front-stage/css/style.css"> -->
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <link rel="stylesheet" href="front-stage/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="front-stage/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="front-stage/css/style.min.css">
+
+</head>
+
+<body>
+
+    <!-- Offcanvas Menu Area Start -->
+    <div th:replace="~{front-stage/common/common::offcanvas}"></div>
+    <!--Offcanvas Menu Area End-->
+
+    <!-- Header Area Start -->
+    <div th:replace="~{front-stage/common/common::header}"></div>
+    <!-- Header Area  End -->
+
+    <!--=====================
+    Breadcrumb Aera Start
+    =========================-->
+    <div class="breadcrumbs_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <li>
+                                <h1><a href="index.html">Home</a></h1>
+                            </li>
+                            <li>
+                                <h1><a href="shop.html">Shop</a></h1>
+                            </li>
+                            <li>Product Details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=====================
+    Breadcrumb Aera End
+    =========================-->
+
+    <!-- ========================
+    Product Details Area Start 
+    ===========================-->
+    <div class="product-area product-details-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-12 mt-50">
+                    <!-- Product Zoom Image start -->
+                    <div class="product-slider-container arrow-center text-center">
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-1.jpg"><img src="front-stage/images/product/product-details/product-details-1.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-2.jpg"><img src="front-stage/images/product/product-details/product-details-2.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-3.jpg"><img src="front-stage/images/product/product-details/product-details-3.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-4.jpg"><img src="front-stage/images/product/product-details/product-details-4.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-5.jpg"><img src="front-stage/images/product/product-details/product-details-5.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-3.jpg"><img src="front-stage/images/product/product-details/product-details-3.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-1.jpg"><img src="front-stage/images/product/product-details/product-details-1.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="product-item">
+                            <a href="front-stage/images/product/product-details/product-details-4.jpg"><img src="front-stage/images/product/product-details/product-details-4.jpg" class="img-fluid" alt="" /></a>
+                        </div>
+                    </div>
+                    <!-- Product Zoom Image End -->
+                    <!-- Product Thumb Zoom Image Start -->
+                    <div class="product-details-thumbnail arrow-center text-center">
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-1.jpg" class="img-fluid" alt="" />
+                        </div>
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-2.jpg" class="img-fluid" alt="" />
+                        </div>
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-3.jpg" class="img-fluid" alt="" />
+                        </div>
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-4.jpg" class="img-fluid" alt="" />
+                        </div>
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-5.jpg" class="img-fluid" alt="" />
+                        </div>
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-3.jpg" class="img-fluid" alt="" />
+                        </div>
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-1.jpg" class="img-fluid" alt="" />
+                        </div>
+                        <div class="product-item-thumb">
+                            <img src="front-stage/images/product/product-details/product-thumb-4.jpg" class="img-fluid" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12 mt-45">
+                    <!-- Product Summery Start -->
+                    <div class="product-summery position-relative">
+                        <div class="product-head">
+                            <h1 class="product-title">Porro quisquam eget feugiat pretium</h1>
+                            <div class="product-arrows text-right">
+                                <a href="#"><i class="fa fa-long-arrow-left"></i></a>
+                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="rating-meta d-flex">
+                            <div class="rating">
+                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                <span class="yellow"><i class="fa fa-star"></i></span>
+                            </div>
+                            <ul class="meta d-flex">
+                                <li>
+                                    <a href="#"><i class="fa fa-commenting-o"></i>Read reviews(3)</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-edit"></i>Write a review</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="price-box">
+                            <span class="regular-price">$30.00</span>
+                        </div>
+                        <div class="product-description">
+                            <p>Porro first 4K UHD Camcorder, the GX10 has a compact and portable design that delivers outstanding video quality with remarkable detail. With a combination of incredible features and functionality, the GX10 is the ideal camcorder for aspiring filmmakers.</p>
+                        </div>
+                        <div class="product-packeges">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="label"><span>Size</span></td>
+                                        <td class="value">
+                                            <div class="product-sizes">
+                                                <a href="#">Large</a>
+                                                <a href="#">Medium</a>
+                                                <a href="#">Small</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label"><span>Color</span></td>
+                                        <td class="value">
+                                            <div class="product-colors">
+                                                <a href="#" data-bg-color="#000000" style="background-color: rgb(0, 0, 0);"></a>
+                                                <a href="#" data-bg-color="#ffffff" style="background-color: rgb(255, 255, 255);"></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label"><span>Quantity</span></td>
+                                        <td class="value">
+                                            <div class="product-quantity">
+                                                <span class="qty-btn minus"><i class="fa fa-angle-down"></i></span>
+                                                <input type="text" class="input-qty" value="1">
+                                                <span class="qty-btn plus"><i class="fa fa-angle-up"></i></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="product-buttons grid_list">
+                            <div class="action-link">
+                                <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
+                                <button class="btn-secondary">Add To Cart</button>
+                                <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-meta">
+                            <div class="desc-content">
+                                <div class="social_sharing d-flex">
+                                    <h5>share this post:</h5>
+                                    <ul>
+                                        <li><a href="#" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#" title="twitter"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                                        <li><a href="#" title="google+"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#" title="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Summery End -->
+                </div>
+            </div>
+            <div class="row mt-40">
+                <div class="col-lg-3 col-sm-3 col-md-2">
+                    <!-- Product Description Tab Start -->
+                    <div class="product-desc-tab">
+                        <ul class="nav flex-column" role="tablist">
+                            <li><a class="active" href="#description" role="tab" data-toggle="tab" aria-selected="false">Description</a></li>
+                            <li><a href="#sheet" role="tab" data-toggle="tab" aria-selected="false">Data sheet</a></li>
+                            <li><a href="#reviews" role="tab" data-toggle="tab" aria-selected="true">Reviews</a></li>
+                        </ul>
+                    </div>
+                    <!-- Product Description Tab End -->
+                </div>
+                <div class="col-lg-9 col-sm-9 col-md-10">
+                    <div class="product-desc-tab-content">
+                        <!-- Start Single Content -->
+                        <div role="tabpanel" id="description" class="product_tab_content fade active show">
+                            <div class="product_description_wrap mt-20">
+                                <div class="product_desc">
+                                    <h2 class="last-title mb-20">Details</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis noexercit ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id.</p>
+                                </div>
+                                <div class="pro__feature mt-20">
+                                    <h2 class="last-title mb-20">Features</h2>
+                                    <ul class="feature_list">
+                                        <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit</a></li>
+                                        <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate</a></li>
+                                        <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore</a></li>
+                                        <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Content -->
+                        <!-- Start Single Content -->
+                        <div role="tabpanel" id="sheet" class="product_tab_content fade">
+                            <div class="pro__feature mt-20">
+                                <h2 class="last-title mb-20">Features</h2>
+                                <ul class="feature_list">
+                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Irure dolor in reprehenderit in voluptate</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore</a></li>
+                                    <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Content -->
+                        <!-- Start Single Content -->
+                        <div role="tabpanel" id="reviews" class="product_tab_content fade">
+                            <div class="review_address_inner mt-20">
+                                <!-- Start Single Review -->
+                                <div class="pro_review">
+                                    <div class="review_thumb">
+                                        <img src="front-stage/images/blog/comment/comment-3.jpg" alt="review images">
+                                    </div>
+                                    <div class="review_details">
+                                        <div class="review_info">
+                                            <a class="last-title" href="#">Gerald Barnes</a>
+                                            <div class="rating">
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                            </div>
+                                            <div class="rating_send">
+                                                <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
+                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="review_date">
+                                            <span>27 Jun, 2016 at 2:30pm</span>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                    </div>
+                                </div>
+                                <!-- End Single Review -->
+                                <!-- Start Single Review -->
+                                <div class="pro_review pro-second">
+                                    <div class="review_thumb">
+                                        <img src="front-stage/images/blog/comment/comment-3.jpg" alt="review images">
+                                    </div>
+                                    <div class="review_details">
+                                        <div class="review_info">
+                                            <a class="last-title" href="#">Gerald Barnes</a>
+                                            <div class="rating">
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                                <span class="yellow"><i class="fa fa-star"></i></span>
+                                            </div>
+                                            <div class="rating_send">
+                                                <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
+                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="review_date">
+                                            <span>27 Jun, 2016 at 2:30pm</span>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                    </div>
+                                </div>
+                                <!-- End Single Review -->
+                            </div>
+                            <!-- Start RAting Area -->
+                            <div class="rating_wrap mt-20">
+                                <h4 class="last-title">Your Rating</h4>
+                                <div class="rating_list mt-20">
+                                    <!-- Start Single List -->
+                                    <div class="rating">
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                    </div>
+                                    <div class="rating">
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                        <span class="yellow"><i class="fa fa-star"></i></span>
+                                    </div>
+                                    <!-- End Single List -->
+                                </div>
+                            </div>
+                            <!-- End RAting Area -->
+                            <div class="comments_form">
+                                <h3>Leave a Reply </h3>
+                                <p>Your email address will not be published. Required fields are marked *</p>
+                                <form action="#">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="review_comment">Comment </label>
+                                            <textarea name="comment" id="review_comment" spellcheck="false" data-gramm="false"></textarea>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <label for="author">Name</label>
+                                            <input id="author" type="text">
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <label for="email">Email </label>
+                                            <input id="email" type="text">
+                                        </div>
+                                    </div>
+                                    <button class="button" type="submit">Post Comment</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Single Content -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product-details-home2 mt-45 mb-15">
+                        <div class="block-title">
+                            <h6>Related Products</h6>
+                        </div>
+                        <div class="product-carousel-home2 slick-custom slick-custom-default nav-top">
+                            <div class="product-row">
+                                <!-- Single-Product-Start -->
+                                <div class="item-product">
+                                    <div class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img src="front-stage/images/product/product-11.jpg" alt="" class="img-fluid">
+                                        </a>
+                                        <div class="box-label">
+                                            <div class="label-product-new">
+                                                <span>New</span>
+                                            </div>
+                                        </div>
+                                        <div class="action-link">
+                                            <a class="quick-view same-link" href="#" title="Quick view" data-toggle="modal" data-target="#modal_box" data-original-title="quick view"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a>
+                                            <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
+                                            <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption">
+                                        <div class="product-name">
+                                            <a href="product-details.html">Natus erro at congue massa commodo sit dignissim</a>
+                                        </div>
+                                        <div class="rating">
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price">$30.00</span>
+                                        </div>
+                                        <div class="cart">
+                                            <div class="add-to-cart">
+                                                <a class="cart-plus" href="shopping-cart.html" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single-Product-End -->
+                            </div>
+                            <div class="product-row">
+                                <!-- Single-Product-Start -->
+                                <div class="item-product">
+                                    <div class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img src="front-stage/images/product/product-2.jpg" alt="" class="img-fluid">
+                                        </a>
+                                        <div class="box-label">
+                                            <div class="label-product-new">
+                                                <span>New</span>
+                                            </div>
+                                        </div>
+                                        <div class="action-link">
+                                            <a class="quick-view same-link" href="#" title="Quick view" data-toggle="modal" data-target="#modal_box" data-original-title="quick view"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a>
+                                            <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
+                                            <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption">
+                                        <div class="product-name">
+                                            <a href="product-details.html">Mirum est notare tellus eu nibh iaculis pretium</a>
+                                        </div>
+                                        <div class="rating">
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price">$30.00</span>
+                                        </div>
+                                        <div class="cart">
+                                            <div class="add-to-cart">
+                                                <a class="cart-plus" href="shopping-cart.html" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single-Product-End -->
+                            </div>
+                            <div class="product-row">
+                                <!-- Single-Product-Start -->
+                                <div class="item-product">
+                                    <div class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img src="front-stage/images/product/product-8.jpg" alt="" class="img-fluid">
+                                        </a>
+                                        <div class="action-link">
+                                            <a class="quick-view same-link" href="#" title="Quick view" data-toggle="modal" data-target="#modal_box" data-original-title="quick view"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a>
+                                            <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
+                                            <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption">
+                                        <div class="product-name">
+                                            <a href="#">Porro quisquam eget feugiat pretium sodales</a>
+                                        </div>
+                                        <div class="rating">
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price">$50.67</span>
+                                            <span class="old-price"><del>$55.50</del></span>
+                                        </div>
+                                        <div class="cart">
+                                            <div class="add-to-cart">
+                                                <a href="shopping-cart.html" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single-Product-End -->
+                            </div>
+                            <div class="product-row">
+                                <!-- Single-Product-Start -->
+                                <div class="item-product">
+                                    <div class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img src="front-stage/images/product/product-3.jpg" alt="" class="img-fluid">
+                                        </a>
+                                        <div class="action-link">
+                                            <a class="quick-view same-link" href="#" title="Quick view" data-toggle="modal" data-target="#modal_box" data-original-title="quick view"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a>
+                                            <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
+                                            <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption">
+                                        <div class="product-name">
+                                            <a href="#">Porro quisquam eget feugiat pretium sodales</a>
+                                        </div>
+                                        <div class="rating">
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price">$50.67</span>
+                                            <span class="old-price"><del>$55.50</del></span>
+                                        </div>
+                                        <div class="cart">
+                                            <div class="add-to-cart">
+                                                <a href="shopping-cart.html" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single-Product-End -->
+                            </div>
+                            <div class="product-row">
+                                <!-- Single-Product-Start -->
+                                <div class="item-product">
+                                    <div class="product-thumb">
+                                        <a href="product-details.html">
+                                            <img src="front-stage/images/product/product-8.jpg" alt="" class="img-fluid">
+                                        </a>
+                                        <div class="box-label">
+                                            <div class="label-product-new">
+                                                <span>New</span>
+                                            </div>
+                                            <div class="label-product-discount">
+                                                <span>-20%</span>
+                                            </div>
+                                        </div>
+                                        <div class="action-link">
+                                            <a class="quick-view same-link" href="#" title="Quick view" data-toggle="modal" data-target="#modal_box" data-original-title="quick view"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a>
+                                            <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
+                                            <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-caption">
+                                        <div class="product-name">
+                                            <a href="product-details.html">Natus erro at congue massa commodo sit dignissim</a>
+                                        </div>
+                                        <div class="rating">
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                            <span class="yellow"><i class="fa fa-star"></i></span>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price">$50.67</span>
+                                            <span class="old-price"><del>$55.50</del></span>
+                                        </div>
+                                        <div class="cart">
+                                            <div class="add-to-cart">
+                                                <a href="shoppint-cart.html" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single-Product-End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========================
+    Product Details Area End 
+    ===========================-->
+
+
+
+
+    <!--footer area start -->
+    <div th:replace="~{front-stage/common/common::footer}"></div>
+    <!--footer area end -->
+
+    <!-- Scroll To Top Start -->
+    <a class="scroll-to-top" href=""><i class="fa fa-angle-up"></i></a>
+    <!-- Scroll To Top End -->
+
+    <!-- modal area start-->
+    <div th:replace="~{front-stage/common/common::modal}"></div>
+    <!-- modal area end-->
+
+
+    <!-- JS============================================ -->
+
+    <!-- Vendors JS -->
+    <!--<script src="front-stage/js/vendor/jquery-3.4.1.min.js"></script>
+<script src="front-stage/js/vendor/jquery-migrate-3.1.0.min.js"></script>
+<script src="front-stage/js/vendor/modernizr-3.8.0.min.js"></script>
+<script src="front-stage/js/vendor/bootstrap.min.js"></script> -->
+    <!-- Plugins JS -->
+    <!-- <script src="front-stage/js/plugins/plugins.js"></script>
+<script src="front-stage/js/plugins/jquery.ui.js"></script>
+<script src="front-stage/js/plugins/jquery.ajaxchimp.min.js"></script>
+<script src="front-stage/js/plugins/jquery.magnific-popup.min.js"></script>
+<script src="front-stage/js/plugins/slick.min.js"></script>
+<script src="front-stage/js/plugins/modal.min.js"></script>
+<script src="front-stage/js/plugins/sticky-sidebar.min.js"></script>
+<script src="front-stage/js/plugins/countdown.min.js"></script>
+<script src="front-stage/js/plugins/jquery.nice-select.min.js"></script> -->
+
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <script src="front-stage/js/vendor/vendor.min.js"></script>
+    <script src="front-stage/js/plugins/plugins.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="front-stage/js/main.js"></script>
+
+</body>
+
+</html>
