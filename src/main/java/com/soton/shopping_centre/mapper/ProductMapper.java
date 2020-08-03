@@ -31,7 +31,7 @@ public interface ProductMapper extends BaseMapper<Product> {
 
     @Select("select * from product left join category on product.category_id=category.id where " + "${ew.sqlSegment}")
     //@ResultMap(value="productMap")
-    Product selectOneProductBy(QueryWrapper<Product> wrapper);
+    Product selectOneProductBy(@Param("ew") QueryWrapper<Product> wrapper);
 
 
 }

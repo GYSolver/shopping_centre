@@ -48,7 +48,7 @@ public class ProductController {
             return "redirect:/dashboard/product/";
         }
         else
-            return "/404-page";
+            return "/front-stage/404";
     }
 
     @GetMapping("/edit/{id}")
@@ -66,7 +66,7 @@ public class ProductController {
             return "redirect:/dashboard/product/";
         }
         else
-            return "/404-page";
+            return "/front-stage/404";
     }
 
 

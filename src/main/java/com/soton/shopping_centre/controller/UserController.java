@@ -26,8 +26,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/")
-    public String onGetIndex(){ return "/front-stage/index"; }
+    /*@GetMapping("/")
+    public String onGetIndex(){ return "/front-stage/index"; }*/
 
     @GetMapping("/login")
     public String onGetLoginAdmin(){

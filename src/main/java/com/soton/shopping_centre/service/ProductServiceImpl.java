@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product queryProductById(Integer id) {
         QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("id",id);
+        queryWrapper.eq("product.id",id);
         //return productMapper.selectOne(queryWrapper);
         return productMapper.selectOneProductBy(queryWrapper);
     }
@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product queryProductByName(String name) {
         QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name",name);
+        queryWrapper.eq("product.name",name);
         //return productMapper.selectOne(queryWrapper);
         return productMapper.selectOneProductBy(queryWrapper);
     }

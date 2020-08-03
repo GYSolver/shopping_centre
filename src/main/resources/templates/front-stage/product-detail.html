@@ -26,9 +26,9 @@
     <link rel="stylesheet" href="front-stage/css/style.css"> -->
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <link rel="stylesheet" href="front-stage/css/vendor/vendor.min.css">
-    <link rel="stylesheet" href="front-stage/css/plugins/plugins.min.css">
-    <link rel="stylesheet" href="front-stage/css/style.min.css">
+    <link rel="stylesheet" href="/front-stage/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="/front-stage/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="/front-stage/css/style.min.css">
 
 </head>
 
@@ -135,20 +135,20 @@
                     <!-- Product Summery Start -->
                     <div class="product-summery position-relative">
                         <div class="product-head">
-                            <h1 class="product-title">Porro quisquam eget feugiat pretium</h1>
-                            <div class="product-arrows text-right">
+                            <h1 class="product-title" th:text="${productDetail.getName()}"></h1>
+                            <!--<div class="product-arrows text-right">
                                 <a href="#"><i class="fa fa-long-arrow-left"></i></a>
                                 <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="rating-meta d-flex">
-                            <div class="rating">
+                            <!--<div class="rating">
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
-                            </div>
+                            </div>-->
                             <ul class="meta d-flex">
                                 <li>
                                     <a href="#"><i class="fa fa-commenting-o"></i>Read reviews(3)</a>
@@ -159,10 +159,10 @@
                             </ul>
                         </div>
                         <div class="price-box">
-                            <span class="regular-price">$30.00</span>
+                            <span class="regular-price" th:text="${productDetail.getId()}"></span>
                         </div>
                         <div class="product-description">
-                            <p>Porro first 4K UHD Camcorder, the GX10 has a compact and portable design that delivers outstanding video quality with remarkable detail. With a combination of incredible features and functionality, the GX10 is the ideal camcorder for aspiring filmmakers.</p>
+                            <p th:text="${productDetail.getBrand()}"></p>
                         </div>
                         <div class="product-packeges">
                             <table>
@@ -206,7 +206,7 @@
                                 <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
                             </div>
                         </div>
-                        <div class="product-meta">
+                        <!--<div class="product-meta">
                             <div class="desc-content">
                                 <div class="social_sharing d-flex">
                                     <h5>share this post:</h5>
@@ -219,7 +219,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <!-- Product Summery End -->
                 </div>
@@ -230,7 +230,7 @@
                     <div class="product-desc-tab">
                         <ul class="nav flex-column" role="tablist">
                             <li><a class="active" href="#description" role="tab" data-toggle="tab" aria-selected="false">Description</a></li>
-                            <li><a href="#sheet" role="tab" data-toggle="tab" aria-selected="false">Data sheet</a></li>
+                            <!--<li><a href="#sheet" role="tab" data-toggle="tab" aria-selected="false">Data sheet</a></li>-->
                             <li><a href="#reviews" role="tab" data-toggle="tab" aria-selected="true">Reviews</a></li>
                         </ul>
                     </div>
@@ -243,9 +243,9 @@
                             <div class="product_description_wrap mt-20">
                                 <div class="product_desc">
                                     <h2 class="last-title mb-20">Details</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis noexercit ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id.</p>
+                                    <p></p>
                                 </div>
-                                <div class="pro__feature mt-20">
+                                <!--<div class="pro__feature mt-20">
                                     <h2 class="last-title mb-20">Features</h2>
                                     <ul class="feature_list">
                                         <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Duis aute irure dolor in reprehenderit</a></li>
@@ -253,7 +253,7 @@
                                         <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Sed do eiusmod tempor incididunt ut labore</a></li>
                                         <li><a href="#"><i class="zmdi zmdi-play-circle"></i>Nisi ut aliquip ex ea commodo consequat.</a></li>
                                     </ul>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         <!-- End Single Content -->
@@ -378,7 +378,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-lg-12">
                     <div class="product-details-home2 mt-45 mb-15">
                         <div class="block-title">
@@ -386,10 +386,10 @@
                         </div>
                         <div class="product-carousel-home2 slick-custom slick-custom-default nav-top">
                             <div class="product-row">
-                                <!-- Single-Product-Start -->
+                                &lt;!&ndash; Single-Product-Start &ndash;&gt;
                                 <div class="item-product">
                                     <div class="product-thumb">
-                                        <a href="product-details.html">
+                                        <a href="product-detail.html">
                                             <img src="front-stage/images/product/product-11.jpg" alt="" class="img-fluid">
                                         </a>
                                         <div class="box-label">
@@ -405,7 +405,7 @@
                                     </div>
                                     <div class="product-caption">
                                         <div class="product-name">
-                                            <a href="product-details.html">Natus erro at congue massa commodo sit dignissim</a>
+                                            <a href="product-detail.html">Natus erro at congue massa commodo sit dignissim</a>
                                         </div>
                                         <div class="rating">
                                             <span class="yellow"><i class="fa fa-star"></i></span>
@@ -424,13 +424,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Single-Product-End -->
+                                &lt;!&ndash; Single-Product-End &ndash;&gt;
                             </div>
                             <div class="product-row">
-                                <!-- Single-Product-Start -->
+                                &lt;!&ndash; Single-Product-Start &ndash;&gt;
                                 <div class="item-product">
                                     <div class="product-thumb">
-                                        <a href="product-details.html">
+                                        <a href="product-detail.html">
                                             <img src="front-stage/images/product/product-2.jpg" alt="" class="img-fluid">
                                         </a>
                                         <div class="box-label">
@@ -446,7 +446,7 @@
                                     </div>
                                     <div class="product-caption">
                                         <div class="product-name">
-                                            <a href="product-details.html">Mirum est notare tellus eu nibh iaculis pretium</a>
+                                            <a href="product-detail.html">Mirum est notare tellus eu nibh iaculis pretium</a>
                                         </div>
                                         <div class="rating">
                                             <span class="yellow"><i class="fa fa-star"></i></span>
@@ -465,13 +465,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Single-Product-End -->
+                                &lt;!&ndash; Single-Product-End &ndash;&gt;
                             </div>
                             <div class="product-row">
-                                <!-- Single-Product-Start -->
+                                &lt;!&ndash; Single-Product-Start &ndash;&gt;
                                 <div class="item-product">
                                     <div class="product-thumb">
-                                        <a href="product-details.html">
+                                        <a href="product-detail.html">
                                             <img src="front-stage/images/product/product-8.jpg" alt="" class="img-fluid">
                                         </a>
                                         <div class="action-link">
@@ -502,13 +502,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Single-Product-End -->
+                                &lt;!&ndash; Single-Product-End &ndash;&gt;
                             </div>
                             <div class="product-row">
-                                <!-- Single-Product-Start -->
+                                &lt;!&ndash; Single-Product-Start &ndash;&gt;
                                 <div class="item-product">
                                     <div class="product-thumb">
-                                        <a href="product-details.html">
+                                        <a href="product-detail.html">
                                             <img src="front-stage/images/product/product-3.jpg" alt="" class="img-fluid">
                                         </a>
                                         <div class="action-link">
@@ -539,13 +539,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Single-Product-End -->
+                                &lt;!&ndash; Single-Product-End &ndash;&gt;
                             </div>
                             <div class="product-row">
-                                <!-- Single-Product-Start -->
+                                &lt;!&ndash; Single-Product-Start &ndash;&gt;
                                 <div class="item-product">
                                     <div class="product-thumb">
-                                        <a href="product-details.html">
+                                        <a href="product-detail.html">
                                             <img src="front-stage/images/product/product-8.jpg" alt="" class="img-fluid">
                                         </a>
                                         <div class="box-label">
@@ -564,7 +564,7 @@
                                     </div>
                                     <div class="product-caption">
                                         <div class="product-name">
-                                            <a href="product-details.html">Natus erro at congue massa commodo sit dignissim</a>
+                                            <a href="product-detail.html">Natus erro at congue massa commodo sit dignissim</a>
                                         </div>
                                         <div class="rating">
                                             <span class="yellow"><i class="fa fa-star"></i></span>
@@ -584,12 +584,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Single-Product-End -->
+                                &lt;!&ndash; Single-Product-End &ndash;&gt;
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <!-- ========================
@@ -632,11 +632,11 @@
 
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <script src="front-stage/js/vendor/vendor.min.js"></script>
-    <script src="front-stage/js/plugins/plugins.min.js"></script>
+    <script src="/front-stage/js/vendor/vendor.min.js"></script>
+    <script src="/front-stage/js/plugins/plugins.min.js"></script>
 
     <!-- Main JS -->
-    <script src="front-stage/js/main.js"></script>
+    <script src="/front-stage/js/main.js"></script>
 
 </body>
 
