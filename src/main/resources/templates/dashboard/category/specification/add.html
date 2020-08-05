@@ -39,13 +39,13 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Add a category</h2>
+                        <h2 class="pageheader-title">Add Specification</h2>
                         <p class="pageheader-text"></p>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Category</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Add</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Specification</li>
                                 </ol>
                             </nav>
                         </div>
@@ -58,20 +58,26 @@
                 <!-- basic form -->
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="card">
-                        <h5 class="card-header">Add a Category</h5>
+                        <h5 class="card-header">Add Specification</h5>
                         <div class="card-body">
-                            <form th:action="@{/dashboard/category/add}" th:method="post" id="basicform" data-parsley-validate="">
+                            <form th:action="@{/dashboard/specification/add}" th:method="post" id="basicform" data-parsley-validate="">
                                 <div class="form-group">
-                                    <label for="inputCategoryName">Category Name</label>
-                                    <input id="inputCategoryName" type="text" name="name" data-parsley-trigger="change" required="" placeholder="Enter category name" autocomplete="off" class="form-control">
+                                    <input id="inputCategoryId"  type="text" name="categoryId" th:value="${categoryId}" data-parsley-trigger="change" required="" placeholder="Enter Specification Name" autocomplete="off" class="form-control" hidden="true">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputImage">Upload Image</label>
-                                    <input id="inputImage" type="text" name="imagePath" data-parsley-trigger="change" required="" placeholder="Enter image" autocomplete="off" class="form-control">
+                                    <a href="#" id="addRow" class="btn btn-info">Add Specification Box</a>
                                 </div>
-
-                                <a href="#" id="addRow" class="btn btn-info">Add a specification</a>
-                                <div id="InputsWrapper"></div>
+                                <div id="InputsWrapper">
+                                    <div class="form-row">
+                                        <label class="col-12 col-form-label">Specification</label>
+                                        <div class="col-sm-5 col-lg-5 mb-3 mb-sm-0">
+                                            <input id="inputName"  type="text" name="sName" data-parsley-trigger="change" required="" placeholder="Enter Specification Name" autocomplete="off" class="form-control">
+                                        </div>
+                                        <div class="col-sm-5 col-lg-5 mb-3 mb-sm-0">
+                                            <input id="inputValue" type="text" name="sValue" data-parsley-trigger="change" required="" placeholder="Enter Specification Value" autocomplete="off" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row form-group">
                                     <div class="col-sm-6 pl-0">
@@ -108,7 +114,7 @@
         var AddButton       = $("#addRow"); //Add button ID
 
         var x = InputsWrapper.length; //initlal text box count
-        var FieldCount=0; //to keep track of text box added
+        var FieldCount=1; //to keep track of text box added
 
         $(AddButton).click(function (e)  //on add input button click
         {
@@ -125,8 +131,9 @@
                         '<div class="col-sm-5 col-lg-5 mb-3 mb-sm-0">'+
                             '<input id="inputValue'+FieldCount+'" type="text" name="sValue" data-parsley-trigger="change" required="" placeholder="Enter Specification Value" autocomplete="off" class="form-control">'+
                         '</div>'+
-                        '<a href="#" class="removeRow btn btn-xs btn-danger ">Delete</a>'+
-                    '</div>');
+                        '<div >'+
+                            '<a href="#" class="removeRow btn btn-xs btn-danger ">Delete</a>'+
+                        '</div>');
                 x++; //text box increment
             }
             return false;
@@ -134,7 +141,7 @@
 
         $("body").on("click",".removeRow", function(e){ //user click on remove text
             if( x > 1 ) {
-                $(this).parent('div').remove(); //remove text box
+                $(this).parent('div').parent('div').remove(); //remove text box
                 x--; //decrement textbox
                 FieldCount--;
             }

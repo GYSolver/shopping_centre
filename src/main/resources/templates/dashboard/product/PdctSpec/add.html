@@ -38,13 +38,13 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Add Product </h2>
+                        <h2 class="pageheader-title">Add Product Specification </h2>
                         <p class="pageheader-text"></p>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Product</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Product Specification</li>
                                 </ol>
                             </nav>
                         </div>
@@ -57,29 +57,33 @@
                 <!-- basic form -->
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="card">
-                        <h5 class="card-header">Add Product</h5>
+                        <h5 class="card-header">Add Product Specification</h5>
                         <div class="card-body">
-                            <form th:action="@{/dashboard/product/add}" th:method="post" class="" id="basicform" data-parsley-validate="">
+                            <form th:action="@{/dashboard/pdctSpec/add}" th:method="post" class="" id="basicform" data-parsley-validate="">
+                                <input id="productId" th:value="${product.getId()}" type="text" name="productId" hidden>
                                 <div class="form-group">
                                     <label for="inputProductName">Product Name</label>
-                                    <input id="inputProductName" type="text" name="name" data-parsley-trigger="change" required="" placeholder="Enter product name" autocomplete="off" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputBrand">Brand</label>
-                                    <input id="inputBrand" type="text" name="brand" data-parsley-trigger="change" required="" placeholder="Enter brand" autocomplete="off" class="form-control">
+                                    <input id="inputProductName" th:value="${product.getName()}" type="text" name="" data-parsley-trigger="change"  autocomplete="off" class="form-control" disabled>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="inputCategory">Category</label>
-                                    <select id="inputCategory" onchange="QuerySpecifications()" name="categoryId" data-parsley-trigger="change" required="" autocomplete="off" class="form-control" >
-                                        <option   value=""   selected>Select a category</option>
-                                        <option   th:each="category:${categories}" th:value="${category.getId()}"  th:text="${category.getName()}" ></option>
-                                    </select>
+                                    <input id="inputCategory" th:value="${category.getName()}" type="text" name="" data-parsley-trigger="change"  autocomplete="off" class="form-control" disabled>
+                                    <input id="inputCategoryId" th:value="${category.getId()}" type="text" name="" hidden>
                                 </div>
-                                <div class="form-group" id="addSpecBtn"></div>
                                 <div class="form-group" id="selectors"></div>
+                                <div class="form-row">
+                                    <div class="col-sm-3 col-lg-3 mb-3 mb-sm-0">
+                                        <label for="inputName">price</label>
+                                        <input id="inputName" type="text"  name="price" data-parsley-trigger="change" required="" placeholder="Enter Price" autocomplete="off" class="form-control">
+                                    </div>
+                                    <div class="col-sm-3 col-lg-3 mb-3 mb-sm-0">
+                                        <label for="inputStock">stock</label>
+                                        <input id="inputStock" type="text"  name="stock" data-parsley-trigger="change" required="" placeholder="Enter Stock" autocomplete="off" class="form-control">
+                                    </div>
+                                </div>
 
-
-                                <div class="row">
+                                <div class="row form-group">
                                     <div class="col-sm-6 pl-0">
                                         <p class="text-right">
                                             <button type="submit" class="btn btn-space btn-primary">Submit</button>
@@ -107,7 +111,7 @@
 <script src="/dashboard/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 <script src="/dashboard/vendor/slimscroll/jquery.slimscroll.js"></script>
 <script src="/dashboard/libs/js/main-js.js"></script>
-<script>
+<!--<script>
     $(document).ready(function() {
         var MaxInputs       = 8; //maximum input boxes allowed
         var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
@@ -141,18 +145,20 @@
         $("body").on("click",".removeRow", function(e){ //user click on remove text
             if( x > 1 ) {
                 $(this).parent('div').parent('div').remove(); //remove text box
-                x--; //decrement textbox
-                FieldCount--;
+                x&#45;&#45;; //decrement textbox
+                FieldCount&#45;&#45;;
             }
             return false;
         })
     });
-</script>
+</script>-->
 <script>
     var specifications;
     var container=$("#selectors");
-    function QuerySpecifications(){
-        var categoryId =  $("#inputCategory").find("option:selected").val();
+    var count=1;
+
+    $(document).ready(function QuerySpecifications(){
+        var categoryId =  $("#inputCategoryId").val();
         $.ajax({
             url: "/dashboard/specification/"+categoryId,
             type: "post",
@@ -162,73 +168,68 @@
             success: function (data) {
                 specifications=data;
                 container.empty();
-                if($("#addRow").length===0){
-                    $("#addSpecBtn").append('<a href="#" id="addRow" class="btn btn-info">Add Specification</a>');
-                }
+                count=1;
                 createSpecificationRow(false);
             },
             error: function (msg) {
                 alert("Error！");
             }
         });
-    }
+    });
+
     var MaxInputs       = 8; //maximum input boxes allowed
     var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
     var AddButton       = $("#addRow"); //Add button ID
-    var count=1;
 
-
-    $("body").on("click","#addRow",function (e)  //on add input button click
+    /*$("body").on("click","#addRow",function (e)  //on add input button click
     {
-        createSpecificationRow(true);
-        return false;
-    });
+        return createSpecificationRow(true);
+    });*/
 
-    $("body").on("click","#removeRow", function(e){ //user click on remove text
-        if(count>0 ) {
-            $(this).parent('div').parent('div').remove(); //remove text box
-            count--;
-        }
-        return false;
-    })
-
-    function createSpecificationRow(hasDeleteBtn){
+    function createSpecificationRow(hasDelete){
         var content='';
 
         content+='<div><hr>Specification ' + count+'<div class="form-row">';
 
         for (var i = 0;i<specifications.length;i++) {
-            var selector="specification"+count;
+            var selector="specification"+count+i;
             content+=
-                ('<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">'
-                    +   '<label for='+selector+'>'+specifications[i][0].name+'</label>'
-                    +   '<select id='+selector+' name="specificationId" data-parsley-trigger="change"  autocomplete="off" class="form-control" >'
-                    +       '<option value="null">select a value</option>');
+                ('<div class="col-sm-3 col-lg-3 mb-3 mb-sm-0">'
+                    +'<label for='+selector+'>'+specifications[i][0].name+'</label>'
+                    +'<select id='+selector+' name="specificationId" data-parsley-trigger="change"  autocomplete="off" class="form-control" >'
+                    +'<option value="null">select a value</option>');
             for(var j = 0;j<specifications[i].length;j++){
                 var spec = specifications[i][j];
                 content+=("<option value="+spec.id+">" + spec.value + "</option>");
             }
-            content+='</select>' +
-                '</div>';
+            content+='</select></div>';
         }
-        content+= ('<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">'
+        /*content+='</div>'
+            +'<div class="form-row">'
+            +'<div class="col-sm-3 col-lg-3 mb-3 mb-sm-0">'
             +'<label for="inputName">price</label>'
             +'<input id="inputName" type="text" name="price" data-parsley-trigger="change" required="" placeholder="Enter Price" autocomplete="off" class="form-control">'
-            +'</div>'+
-            '<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">'
+            +'</div>'
+            +'<div class="col-sm-3 col-lg-3 mb-3 mb-sm-0">'
             +'<label for="inputStock">stock</label>'
-            +'<input id="inputStock" type="text" name="stock" data-parsley-trigger="change" required="" placeholder="Enter Price" autocomplete="off" class="form-control">'
-            +'</div>');
-        if(hasDeleteBtn){
-            content+=('<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2" ><p/>' +
-                '<a href="#" id="removeRow" class="btn btn-xs btn-danger">Delete</a>' +
-                '</div>');
-        }
-        content+= '</div></div>';
+            +'<input id="inputStock" type="text" name="stock" data-parsley-trigger="change" required="" placeholder="Enter Stock" autocomplete="off" class="form-control">'
+            +'</div>';
+        if(hasDelete===true){
+            content+=('<div class="col-sm-3 col-lg-3 mb-3 mb-sm-0" ><a href="#" id="removeRow" class="btn btn-xs btn-danger">Delete</a></div></div></div>');
+        }*/
         container.append(content);
         count++;
         return false;
     }
+
+    /*$("body").on("click","#removeRow", function(e){ //user click on remove text
+        if(count>0 ) {
+            $(this).parent('div').parent('div').parent('div').remove(); //remove text box
+            count--;
+        }
+        return false;
+    })*/
+
 </script>
 </body>
 

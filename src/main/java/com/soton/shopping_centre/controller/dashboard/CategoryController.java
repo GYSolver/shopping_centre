@@ -1,14 +1,13 @@
 package com.soton.shopping_centre.controller.dashboard;
 
 import com.soton.shopping_centre.pojo.Category;
+import com.soton.shopping_centre.pojo.Specification;
 import com.soton.shopping_centre.service.CategoryService;
+import com.soton.shopping_centre.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +16,8 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    SpecificationService specificationService;
 
     @GetMapping("/")
     public String onGetIndex(Model model){
@@ -28,13 +29,20 @@ public class CategoryController {
     public String onGetAdd(){ return "/dashboard/category/add"; }
 
     @PostMapping("/add")
-    public String onPostAdd(Category category){
+    public String onPostAdd(Category category,String[] sName,String[] sValue){
         if(category.getName()!=null){
             categoryService.addCategory(category);
+            for (int i=0;sName!=null&&i<sName.length;i++) {
+                Specification specification = new Specification();
+                specification.setCategoryId(category.getId());
+                specification.setName(sName[i]);
+                specification.setValue(sValue[i]);
+                specificationService.addSpecification(specification);
+            }
             return "redirect:/dashboard/category/";
         }
         else
-            return "/404-page";
+            return "/dashboard/404";
     }
 
     @GetMapping("/edit/{id}")
@@ -52,13 +60,15 @@ public class CategoryController {
             return "redirect:/dashboard/category/";
         }
         else
-            return "/404-page";
+            return "/dashboard/404";
     }
 
 
     @PostMapping("/delete/{id}")
     public String onPostDelete(@PathVariable Integer id){
         categoryService.deleteCategoryById(id);
+        //products are also deleted in CategoryService
+        //specifications are also deleted in CategoryService
         return "redirect:/dashboard/category/";
     }
 }

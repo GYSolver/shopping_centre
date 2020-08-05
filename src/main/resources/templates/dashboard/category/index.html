@@ -57,7 +57,7 @@
                     <div class="card">
                         <h5 class="card-header">Category</h5>
                         <div class="card-body">
-                            <a class="btn btn-sm btn-primary" th:href="@{/dashboard/category/add}">Add</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/dashboard/category/add}">Add Category</a>
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
@@ -67,6 +67,9 @@
                                     <th scope="col">Create Time</th>
                                     <th scope="col">Update Time</th>
                                     <th scope="col">options</th>
+                                    <th scope="col">specifications</th>
+                                    <!--<a data-toggle="collapse" href="#specTable">collapse</a>-->
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -77,8 +80,32 @@
                                     <td th:text="${category.getCreateTime()}"></td>
                                     <td th:text="${category.getUpdateTime()}"></td>
                                     <td>
-                                        <a class="btn btn-sm btn-primary" th:href="@{/dashboard/category/edit/}+${category.getId()}">edit</a>
-                                        <a class="btn btn-sm btn-danger" href="javascript:void(0);" th:onclick="'confirmDelete(' + ${category.getId()} + ');' ">delete</a>
+                                        <a class="btn btn-sm btn-primary" th:href="@{/dashboard/specification/add/}+${category.getId()}">Add Specification</a>
+                                        <a class="btn btn-sm btn-info" th:href="@{/dashboard/category/edit/}+${category.getId()}">edit</a>
+                                        <a class="btn btn-sm btn-danger" href="javascript:void(0);" th:onclick="'confirmDeleteCategory(' + ${category.getId()} + ');' ">delete</a>
+                                    </td>
+                                    <td>
+                                            <table id="specTable" class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Specification Name</th>
+                                                <th scope="col">Specification Value</th>
+                                                <th scope="col">options</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="specification:${category.getSpecifications()}">
+                                                <td th:text="${specification.getId()}"></td>
+                                                <td th:text="${specification.getName()}"></td>
+                                                <td th:text="${specification.getValue()}"></td>
+                                                <td>
+                                                    <a class="btn btn-xs btn-info" th:href="@{/dashboard/specification/edit/}+${specification.getId()}">edit</a>
+                                                    <a class="btn btn-xs btn-danger" href="javascript:void(0);" th:onclick="'confirmDeleteSpec(' + ${specification.getId()} + ');' ">delete</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -104,11 +131,23 @@
 <script src="/dashboard/vendor/custom-js/jquery.multi-select.html"></script>
 <script src="/dashboard/libs/js/main-js.js"></script>
 <script>
-    function confirmDelete(id) {
+    function confirmDeleteCategory(id) {
         if (confirm("Confirm to delete?"))
         {
             $.ajax({
-                url: "/category/delete/" + id,
+                url: "/dashboard/category/delete/" + id,
+                type: "post",
+                success: function () {
+                    window.location.reload()
+                }
+            });
+        }
+    }
+    function confirmDeleteSpec(id) {
+        if (confirm("Confirm to delete?"))
+        {
+            $.ajax({
+                url: "/dashboard/specification/delete/" + id,
                 type: "post",
                 success: function () {
                     window.location.reload()

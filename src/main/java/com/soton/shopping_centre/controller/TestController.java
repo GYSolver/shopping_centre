@@ -6,12 +6,15 @@ import com.soton.shopping_centre.mapper.ProductMapper;
 import com.soton.shopping_centre.mapper.UserMapper;
 import com.soton.shopping_centre.pojo.Category;
 import com.soton.shopping_centre.pojo.Product;
+import com.soton.shopping_centre.pojo.Specification;
 import com.soton.shopping_centre.pojo.User;
 import com.soton.shopping_centre.service.CategoryService;
+import com.soton.shopping_centre.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.swing.*;
 import java.util.List;
 
 @RestController
@@ -24,6 +27,8 @@ public class TestController {
 
     @Autowired
     ProductMapper productMapper;
+    @Autowired
+    SpecificationService specificationService;
 
     @RequestMapping("/test")
     public List<User> userList(){
@@ -44,4 +49,6 @@ public class TestController {
     public List<Product> Product2(){
         return productMapper.selectAllProducts();
     }
+
+
 }

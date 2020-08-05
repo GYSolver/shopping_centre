@@ -38,14 +38,13 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Blank Pageheader </h2>
-                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                        <h2 class="pageheader-title">Edit Category </h2>
+                        <p class="pageheader-text"></p>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Pages</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Blank Pageheader</li>
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Category</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
                                 </ol>
                             </nav>
                         </div>
@@ -58,7 +57,7 @@
                 <!-- basic form -->
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="card">
-                        <h5 class="card-header">Edit a Category</h5>
+                        <h5 class="card-header">Edit Category</h5>
                         <div class="card-body">
                             <form th:action="@{/dashboard/category/edit}" th:method="post" id="basicform" data-parsley-validate="">
                                 <div class="form-group">
@@ -86,7 +85,7 @@
                                     <div class="col-sm-6 pl-0">
                                         <p class="text-right">
                                             <button type="submit" class="btn btn-space btn-primary">Submit</button>
-                                            <button class="btn btn-space btn-secondary" onclick="javascript:history.back(-1);">Cancel</button>
+                                            <button class="btn btn-space btn-secondary" onclick="history.go(-1);return false;">Cancel</button>
                                         </p>
                                     </div>
                                 </div>

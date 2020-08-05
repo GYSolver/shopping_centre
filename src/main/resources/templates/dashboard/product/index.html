@@ -62,27 +62,56 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Image</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Brand</th>
                                     <th scope="col">Category</th>
-                                    <th scope="col">Create Time</th>
-                                    <th scope="col">Update Time</th>
+                                    <!--<th scope="col">Create Time</th>
+                                    <th scope="col">Update Time</th>-->
                                     <th scope="col">options</th>
+                                    <th scope="col">specifications</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="product:${products}">
                                     <td th:text="${product.getId()}"></td>
-                                    <td th:text="${product.getImagePath()}"></td>
                                     <td th:text="${product.getName()}"></td>
                                     <td th:text="${product.getBrand()}"></td>
                                     <td th:text="${product.getCategory().getName()}"></td>
-                                    <td th:text="${product.getCreateTime()}"></td>
-                                    <td th:text="${product.getUpdateTime()}"></td>
+                                    <!--<td th:text="${product.getCreateTime()}"></td>
+                                    <td th:text="${product.getUpdateTime()}"></td>-->
                                     <td>
-                                        <a class="btn btn-sm btn-primary" th:href="@{/dashboard/product/edit/}+${product.getId()}">edit</a>
-                                        <a class="btn btn-sm btn-danger" href="javascript:void(0);" th:onclick="'confirmDelete(' + ${product.getId()} + ');' ">delete</a>
+                                        <a class="btn btn-sm btn-primary" th:href="@{/dashboard/pdctSpec/add/}+${product.getId()}">Add Pdct Spec</a>
+                                        <a class="btn btn-sm btn-info" th:href="@{/dashboard/product/edit/}+${product.getId()}">edit</a>
+                                        <a class="btn btn-sm btn-danger" href="javascript:void(0);" th:onclick="'confirmDeleteProduct(' + ${product.getId()} + ');' ">delete</a>
+                                    </td>
+                                    <td>
+                                        <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Specifications</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Stock</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Update Time</th>
+                                                <th scope="col">options</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="pdctSpec:${product.getProductSpecifications()}">
+                                                <td th:text="${pdctSpec.getId()}"></td>
+                                                <td th:text="${pdctSpec.getSpecification()}"></td>
+                                                <td th:text="${pdctSpec.getPrice()}"></td>
+                                                <td th:text="${pdctSpec.getStock()}"></td>
+                                                <td th:text="${pdctSpec.getImagePath()}"></td>
+                                                <td th:text="${pdctSpec.getUpdateTime()}"></td>
+                                                <td>
+                                                    <a class="btn btn-xs btn-info" th:href="@{/dashboard/pdctSpec/edit/}+${pdctSpec.getId()}">edit</a>
+                                                    <a class="btn btn-xs btn-danger" href="javascript:void(0);" th:onclick="'confirmDeletePdctSpec(' + ${pdctSpec.getId()} + ');' ">delete</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -109,11 +138,23 @@
 <script src="/dashboard/vendor/custom-js/jquery.multi-select.html"></script>
 <script src="/dashboard/libs/js/main-js.js"></script>
 <script>
-    function confirmDelete(id) {
+    function confirmDeleteProduct(id) {
         if (confirm("Confirm to delete?"))
         {
             $.ajax({
-                url: "/category/delete/" + id,
+                url: "/dashboard/product/delete/" + id,
+                type: "post",
+                success: function () {
+                    window.location.reload()
+                }
+            });
+        }
+    }
+    function confirmDeletePdctSpec(id) {
+        if (confirm("Confirm to delete?"))
+        {
+            $.ajax({
+                url: "/dashboard/pdctSpec/delete/" + id,
                 type: "post",
                 success: function () {
                     window.location.reload()

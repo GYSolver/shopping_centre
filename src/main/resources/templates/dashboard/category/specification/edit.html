@@ -26,7 +26,7 @@
     <!-- left sidebar -->
     <div class="nav-left-sidebar sidebar-dark">
         <div class="menu-list">
-            <div th:replace="~{dashboard/common/common::sidebar(active='product')}"></div>
+            <div th:replace="~{dashboard/common/common::sidebar(active='category')}"></div>
         </div>
     </div>
     <!-- end left sidebar -->
@@ -38,13 +38,13 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Edit Product</h2>
+                        <h2 class="pageheader-title">Edit Category </h2>
                         <p class="pageheader-text"></p>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Product</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Category</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
                                 </ol>
                             </nav>
                         </div>
@@ -57,32 +57,28 @@
                 <!-- basic form -->
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="card">
-                        <h5 class="card-header">Edit a Product</h5>
+                        <h5 class="card-header">Edit Category</h5>
                         <div class="card-body">
-                            <form th:action="@{/dashboard/product/edit}" th:method="post" id="basicform" data-parsley-validate="">
+                            <form th:action="@{/dashboard/specification/edit}" th:method="post" id="basicform" data-parsley-validate="">
                                 <div class="form-group">
-                                    <input type="text" th:value="${product.getId()}" name="id" class="form-control" hidden>
-                                    <input type="text" th:value="${product.getCategoryId()}" name="categoryId" class="form-control" hidden>
+                                    <input type="text" th:value="${specification.getId()}" name="id" class="form-control" hidden>
+                                    <input type="text" th:value="${specification.getCategoryId()}" name="categoryId" class="form-control" hidden>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputProductName">Product Name</label>
-                                    <input id="inputProductName"  th:value="${product.getName()}" type="text" name="name" data-parsley-trigger="change" placeholder="Enter category name" autocomplete="off" class="form-control">
+                                    <label for="inputSpecificationName">Specification Name</label>
+                                    <input id="inputSpecificationName"  th:value="${specification.getName()}" type="text" name="name" data-parsley-trigger="change" placeholder="Enter category name" autocomplete="off" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputBrand">Brand</label>
-                                    <input id="inputBrand"  th:value="${product.getBrand()}" type="text" name="brand" data-parsley-trigger="change" placeholder="Enter category name" autocomplete="off" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputCategory">Category</label>
-                                    <input id="inputCategory"  th:value="${product.getCategory().getName()}" type="text" name="" data-parsley-trigger="change" placeholder="Enter category name" autocomplete="off" class="form-control" disabled>
+                                    <label for="inputSpecificationValue">Specification Value</label>
+                                    <input id="inputSpecificationValue" th:value="${specification.getValue()}" type="text" name="value" data-parsley-trigger="change" placeholder="Enter image" autocomplete="off" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputCreateTime">Create Time</label>
-                                    <input id="inputCreateTime" th:value="${product.getCreateTime()}" type="text" name="createTime" data-parsley-trigger="change"  autocomplete="off" class="form-control" disabled>
+                                    <input id="inputCreateTime" th:value="${specification.getCreateTime()}" type="text" name="createTime" data-parsley-trigger="change"  autocomplete="off" class="form-control" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputUpdateTIme">Update Time</label>
-                                    <input id="inputUpdateTIme" th:value="${product.getUpdateTime()}" type="text" name="updateTime" data-parsley-trigger="change"  autocomplete="off" class="form-control" disabled="">
+                                    <input id="inputUpdateTIme" th:value="${specification.getUpdateTime()}" type="text" name="updateTime" data-parsley-trigger="change"  autocomplete="off" class="form-control" disabled="">
                                 </div>
 
 

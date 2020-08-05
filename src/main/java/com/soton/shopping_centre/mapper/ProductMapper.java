@@ -15,23 +15,26 @@ public interface ProductMapper extends BaseMapper<Product> {
             @Result(property = "id",column = "id"),
             @Result(property = "name",column = "name"),
             @Result(property = "brand",column = "brand"),
-            @Result(property = "imagePath",column = "image_path"),
             @Result(property = "categoryId",column = "category_id"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "updateTime",column = "update_time"),
             @Result(property = "category",column = "category_id",
-                    one = @One(select = "com.soton.shopping_centre.mapper.CategoryMapper.selectById"))
+                    one = @One(select = "com.soton.shopping_centre.mapper.CategoryMapper.selectById")),
+            @Result(property = "productSpecifications",column = "id",
+                    many = @Many(select = "com.soton.shopping_centre.mapper.ProductSpecificationMapper.selectPdctSpecsByProductId"))
                  })
-    /*@Select("select * from product left join category on product.category_id=category.id where product.id=#{id}")
-    Product selectProductById(int id);*/
-
-    @Select("select * from product left join category on product.category_id=category.id")
-    //@ResultMap(value="productMap")
+    @Select("select * from product")
     List<Product> selectAllProducts();
 
-    @Select("select * from product left join category on product.category_id=category.id where " + "${ew.sqlSegment}")
-    //@ResultMap(value="productMap")
+    @ResultMap("productMap")
+    @Select("select * from product where ${ew.sqlSegment}")
     Product selectOneProductBy(@Param("ew") QueryWrapper<Product> wrapper);
 
+    @ResultMap("productMap")
+    @Select("select * from product where id=#{id}")
+    Product selectOneProductById(Integer id);
 
+    //@ResultMap("productMap")
+    @Select("select * from product where category_id=#{cid}")
+    List<Product> selectProductByCategoryId(Integer cid);
 }

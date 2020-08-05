@@ -8,6 +8,7 @@ public interface ProductService {
     public List<Product> queryAllProducts();
     public Product queryProductById(Integer id);
     public Product queryProductByName(String name);
+    public List<Product> queryProductsByCategoryId(Integer cid);
 
     public int addProduct(Product product);
     public int deleteProductById(Integer id);

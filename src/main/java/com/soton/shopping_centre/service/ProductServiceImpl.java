@@ -2,8 +2,10 @@ package com.soton.shopping_centre.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.soton.shopping_centre.mapper.ProductMapper;
+import com.soton.shopping_centre.mapper.ProductSpecificationMapper;
 import com.soton.shopping_centre.pojo.Category;
 import com.soton.shopping_centre.pojo.Product;
+import com.soton.shopping_centre.pojo.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductMapper productMapper;
+
+    @Autowired
+    ProductSpecificationService productSpecificationService;
 
     @Override
     public List<Product> queryAllProducts() {
@@ -37,10 +42,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> queryProductsByCategoryId(Integer cid) {
+        return productMapper.selectProductByCategoryId(cid);
+    }
+
+    @Override
     public int addProduct(Product product) { return productMapper.insert(product); }
 
     @Override
-    public int deleteProductById(Integer id) { return productMapper.deleteById(id); }
+    public int deleteProductById(Integer id) {
+        List<ProductSpecification> productSpecifications = productSpecificationService.queryPdctSpecByProductId(id);
+        for (ProductSpecification productSpecification : productSpecifications) {
+            productSpecificationService.deletePdctSpecById(productSpecification.getId());
+        }
+        return productMapper.deleteById(id);
+    }
 
     @Override
     public int editProduct(Product product) { return productMapper.updateById(product); }

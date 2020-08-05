@@ -1,6 +1,7 @@
 package com.soton.shopping_centre.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -8,26 +9,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@TableName("user")
-public class User {
+@TableName("product_specification")
+public class ProductSpecification {
     @TableId(type= IdType.AUTO)
     private int id;
-    private String username;
-    private String password;
-    private String salt;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
+    private int productId;
+    private String specification;
+    private int price;
+    private int stock;
     private String imagePath;
-    private String address;
-    private String postcode;
-    private String roleId;
-    public String roleName;
     private String createTime;
     private String updateTime;
+
+    @TableField(exist = false)
+    Product product;
+
 }
