@@ -162,6 +162,7 @@
             success: function (data) {
                 specifications=data;
                 container.empty();
+                count=1;
                 if($("#addRow").length===0){
                     $("#addSpecBtn").append('<a href="#" id="addRow" class="btn btn-info">Add Specification</a>');
                 }
@@ -190,7 +191,7 @@
             count--;
         }
         return false;
-    })
+    });
 
     function createSpecificationRow(hasDeleteBtn){
         var content='';

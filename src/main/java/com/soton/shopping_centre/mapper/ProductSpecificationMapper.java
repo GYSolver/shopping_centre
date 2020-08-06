@@ -20,9 +20,9 @@ public interface ProductSpecificationMapper extends BaseMapper<ProductSpecificat
             @Result(property = "stock",column = "stock"),
             @Result(property = "imagePath",column = "image_path"),
             @Result(property = "createTime",column = "create_time"),
-            @Result(property = "updateTime",column = "update_time")
-            /*@Result(property = "product",column = "product_id",
-                    one = @One(select = "com.soton.shopping_centre.mapper.ProductMapper.selectOneProductById")),*/
+            @Result(property = "updateTime",column = "update_time"),
+            @Result(property = "product",column = "product_id",
+                    one = @One(select = "com.soton.shopping_centre.mapper.ProductMapper.selectById")),
     })
     @Select("select * from product_specification where " + "${ew.sqlSegment}")
     List<ProductSpecification> selectPdctSpecBy(@Param("ew") QueryWrapper<ProductSpecification> wrapper);
@@ -30,4 +30,8 @@ public interface ProductSpecificationMapper extends BaseMapper<ProductSpecificat
     @ResultMap("pdctSpecMap")
     @Select("select * from product_specification where product_specification.product_id=#{productId}")
     List<ProductSpecification> selectPdctSpecsByProductId(Integer productId);
+
+    @ResultMap("pdctSpecMap")
+    @Select("select * from product_specification where product_specification.id=#{id}")
+    ProductSpecification selectPdctSpecById(Integer id);
 }

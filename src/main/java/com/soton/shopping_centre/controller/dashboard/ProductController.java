@@ -64,7 +64,7 @@ public class ProductController {
                 if(specificationId!=null) {
                     HashMap<String,String> specMap = new HashMap<>();
                     for (int j = 0; j < specificationId.length / price.length; j++) {
-                        Specification specification = specificationService.querySpecificationById(specificationId[i * price.length + j]);
+                        Specification specification = specificationService.querySpecificationById(specificationId[i * (specificationId.length / price.length) + j]);
                         specMap.put(specification.getName(), specification.getValue());
                     }
                     jsonStr = objectMapper.writeValueAsString(specMap);
