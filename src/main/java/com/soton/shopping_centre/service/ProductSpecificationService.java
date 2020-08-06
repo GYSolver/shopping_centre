@@ -9,6 +9,7 @@ public interface ProductSpecificationService {
     public List<ProductSpecification> queryAllPdctSpecs();
     public ProductSpecification queryPdctSpecById(Integer id);
     public List<ProductSpecification> queryPdctSpecByProductId(Integer productId);
+    //public ProductSpecification queryPdctSpecBySpec(String spec);
 
     public int addPdctSpec(ProductSpecification productSpecification);
     public int deletePdctSpecById(Integer id);
