@@ -57,6 +57,7 @@ public class CartController {
                         HashMap<String, String> cartMap = objectMapper.readValue(cookieStr, HashMap.class);
 
                         Cart cart = new Cart();
+                        cart.setId(Integer.parseInt(cartMap.get("cartId")));
                         cart.setProductId(Integer.parseInt(cartMap.get("productId")));
                         cart.setProductSpecificationId(Integer.parseInt(cartMap.get("productSpecificationId")));
                         cart.setQuantity(Integer.parseInt(cartMap.get("quantity")));
@@ -121,15 +122,17 @@ public class CartController {
             }
             else {
                 String pdctSpecStr = objectMapper.writeValueAsString(productSpecification);
+                int currentTime=(int)System.currentTimeMillis();
 
                 HashMap<String, String> cartMap = new HashMap<>();
+                cartMap.put("cartId", String.valueOf(currentTime));
                 cartMap.put("productId", String.valueOf(productId));
                 cartMap.put("productSpecificationId", String.valueOf(productSpecificationId));
                 cartMap.put("quantity", String.valueOf(quantity));
                 cartMap.put("pdctSpec",pdctSpecStr);
 
                 String cookieStr= URLEncoder.encode(objectMapper.writeValueAsString(cartMap),"utf-8") ;
-                String cookieName="cartData"+System.currentTimeMillis();
+                String cookieName="cartData"+currentTime;
                 Cookie cartCookie = new Cookie(cookieName, cookieStr);
 
                 cartCookie.setMaxAge(24 * 60 * 60);// 24h
@@ -142,9 +145,27 @@ public class CartController {
         else
             return "/front-stage/404";
     }
+
     @PostMapping("/delete/{id}")
-    public  String OnPostDelete(@PathVariable Integer id){
-        cartService.deleteCartById(id);
+    public  String OnPostDelete(@PathVariable Integer id,HttpServletRequest request,HttpServletResponse response){
+        //has logged in: query from db; else: query from cookie;
+        Subject currentUser = SecurityUtils.getSubject();
+
+        if (currentUser.isAuthenticated()){
+            cartService.deleteCartById(id);
+        }
+        else{
+            Cookie[] cookies =  request.getCookies();
+            if(cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().substring(8).equals(String.valueOf(id))) {
+                        cookie.setMaxAge(0);
+                        cookie.setPath("/");
+                        response.addCookie(cookie);
+                    }
+                }
+            }
+        }
         return "redirect:/cart/";
     }
 }

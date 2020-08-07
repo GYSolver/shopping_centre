@@ -1,5 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -893,15 +894,15 @@
                                                 <label>Quantity</label>
                                                 <label><input min="1" max="100" th:value="${cart.getQuantity()}" type="number"></label>
                                             </td>
-                                            <td class="product-total" th:text="${cart.getQuantity() * cart.getProductSpecification().getPrice()}"></td>
+                                            <td class="product-total-val" th:text="${cart.getQuantity() * cart.getProductSpecification().getPrice()}"></td>
                                             <td class="product-remove"><a href="javascript:void(0);" th:onclick="'confirmDelete('+${cart.getId()}+');'"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="cart-submit">
+                            <!--<div class="cart-submit">
                                 <button type="submit">update cart</button>
-                            </div>
+                            </div>-->
                         </div>
                         <!-- Cart Table Area End -->
                         <!-- Coupon Area Start -->
@@ -923,20 +924,20 @@
                                         <div class="coupon-inner">
                                             <div class="cart-subtotal">
                                                 <p>Subtotal</p>
-                                                <p class="cart-amount">£215.00</p>
+                                                <p id="subtotal" class="cart-amount"></p>
                                             </div>
                                             <div class="cart-subtotal ">
                                                 <p>Shipping</p>
-                                                <p class="cart-amount"><span>Flat Rate:</span> £255.00</p>
+                                                <p id="shipping-fee" class="cart-amount">£5.00</p>
                                             </div>
-                                            <a href="#">Calculate shipping</a>
+                                            <!--<a href="#">Calculate shipping</a>-->
 
                                             <div class="cart-subtotal">
                                                 <p>Total</p>
-                                                <p class="cart-amount">£215.00</p>
+                                                <p id="total" class="cart-amount"></p>
                                             </div>
                                             <div class="checkout-btn">
-                                                <a href="#">Proceed to Checkout</a>
+                                                <a href="#">Checkout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1305,6 +1306,25 @@
                 });
             }
         }
+    </script>
+
+    <!--calculate total fees-->
+    <script>
+        $( function(){
+            var productTotals=$('.product-total-val');
+            var subtotal=0;
+            for(var i=0;i<productTotals.length;i++){
+                if(productTotals[i].tagName=="TD"){
+                    subtotal+=(parseInt(productTotals[i].textContent));
+                }
+            }
+
+            $('#subtotal').text('£'+subtotal);
+
+            var total=subtotal+5;
+            $('#total').text('£'+total);
+            return false;
+        } );
     </script>
 
 </body>
