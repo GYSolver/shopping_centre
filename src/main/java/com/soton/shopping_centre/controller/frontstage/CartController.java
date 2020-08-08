@@ -40,41 +40,70 @@ public class CartController {
     ObjectMapper objectMapper;
 
     @GetMapping("/")
-    public String OnGetIndex(Model model, HttpServletRequest request) throws JsonProcessingException, UnsupportedEncodingException {
-        //has logged in: query from db; else: query from cookie;
-        Subject currentUser = SecurityUtils.getSubject();
-        List<Cart> carts;
-        if (currentUser.isAuthenticated()){
-           carts = cartService.queryAllCarts();
-        }
-        else{
-            carts = new ArrayList<>();
-            Cookie[] cookies =  request.getCookies();
-            if(cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().substring(0,8).equals("cartData")) {
-                        String cookieStr = URLDecoder.decode(cookie.getValue(),"utf-8");
-                        HashMap<String, String> cartMap = objectMapper.readValue(cookieStr, HashMap.class);
+    public String OnGetIndex(Model model, HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
+        //1.get products from cookie
+        List<Cart> carts = new ArrayList<>();
+        Cookie[] cookies =  request.getCookies();
+        List<Cookie> cartCookies = new ArrayList<>();
+        if(cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().substring(0,8).equals("cartData")) {
+                    cartCookies.add(cookie);
+                    String cookieStr = URLDecoder.decode(cookie.getValue(),"utf-8");
+                    HashMap<String, String> cartMap = objectMapper.readValue(cookieStr, HashMap.class);
 
-                        Cart cart = new Cart();
-                        cart.setId(Integer.parseInt(cartMap.get("cartId")));
-                        cart.setProductId(Integer.parseInt(cartMap.get("productId")));
-                        cart.setProductSpecificationId(Integer.parseInt(cartMap.get("productSpecificationId")));
-                        cart.setQuantity(Integer.parseInt(cartMap.get("quantity")));
-                        ProductSpecification productSpecification = objectMapper.readValue(cartMap.get("pdctSpec"), ProductSpecification.class);
-                        cart.setProductSpecification(productSpecification);
+                    Cart cart = new Cart();
+                    cart.setId(Integer.parseInt(cartMap.get("cartId")));
+                    cart.setProductId(Integer.parseInt(cartMap.get("productId")));
+                    cart.setProductSpecificationId(Integer.parseInt(cartMap.get("productSpecificationId")));
+                    cart.setQuantity(Integer.parseInt(cartMap.get("quantity")));
+                    ProductSpecification productSpecification = objectMapper.readValue(cartMap.get("pdctSpec"), ProductSpecification.class);
+                    cart.setProductSpecification(productSpecification);
 
-                        carts.add(cart);
-                    }
+                    carts.add(cart);
                 }
             }
+        }
+
+        //if has logged in:
+        //      if has products in cookie, put them in db and clean cookie,finally query from db;
+        //else: use products from cookie;
+        Subject currentUser = SecurityUtils.getSubject();
+        User user = (User) currentUser.getPrincipal();
+        if (currentUser.isAuthenticated()){
+            //1.if have cart in cookie
+            if(cartCookies.size()>0){
+                //add carts into db
+                for(Cart cart : carts){
+                    //if products in cookie are the same products in db, update db
+                    Cart cartDb = cartService.queryCartByProductIdAndPSId(user.getId(),cart.getProductId(), cart.getProductSpecificationId());
+                    if(cartDb!=null){//duplicated
+                        cartDb.setQuantity(cartDb.getQuantity()+cart.getQuantity());
+                        cartService.editCart(cartDb);
+                    }
+                    else {
+                        cart.setUserId(user.getId());
+                        cartService.addCart(cart);
+                    }
+                }
+
+                //delete products in cookie
+                for(Cookie cookie:cartCookies){
+                    cookie.setMaxAge(0);
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                }
+
+            }
+
+           carts = cartService.queryAllCarts();
         }
         model.addAttribute("carts",carts);
         return "/front-stage/cart";
     }
 
     @PostMapping("/add")
-    public String OnPostAdd(Integer productId, int[] specificationId, Integer quantity, HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
+    public String OnPostAdd(Integer productId, int[] specificationId, Integer quantity, HttpServletRequest request,HttpServletResponse response) throws JsonProcessingException, UnsupportedEncodingException {
         if (productId != null) {
             //get product specification
             ProductSpecification productSpecification = null;
@@ -106,21 +135,48 @@ public class CartController {
 
             //has logged in: storage in db; else: storage in cookie;
             Subject currentUser = SecurityUtils.getSubject();
+            User user = (User) currentUser.getPrincipal();
             if (currentUser.isAuthenticated()) {
+                //validate duplicated product in db
+                Cart cartDb = cartService.queryCartByProductIdAndPSId(user.getId(),productId, productSpecificationId);
+                if(cartDb!=null){
+                    cartDb.setQuantity(cartDb.getQuantity()+quantity);
+                    cartService.editCart(cartDb);
+                } //duplicated
+                else {
+                    Cart cart = new Cart();
+                    cart.setProductId(productId);
+                    cart.setQuantity(quantity);
 
-                Cart cart = new Cart();
-                cart.setProductId(productId);
-                cart.setQuantity(quantity);
+                    cart.setUserId(user.getId());
 
-                User user = (User) currentUser.getPrincipal();
-                cart.setUserId(user.getId());
-
-                cart.setProductSpecificationId(productSpecificationId);
-                cart.setProductSpecification(productSpecification);
-                cartService.addCart(cart);
-
+                    cart.setProductSpecificationId(productSpecificationId);
+                    cart.setProductSpecification(productSpecification);
+                    cartService.addCart(cart);
+                }
             }
             else {
+                //validate duplicated product in cookies
+                Cookie[] cookies =  request.getCookies();
+                if(cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().substring(0,8).equals("cartData")) {
+                            String cookieStr = URLDecoder.decode(cookie.getValue(),"utf-8");
+                            HashMap<String, String> cartMap = objectMapper.readValue(cookieStr, HashMap.class);
+                            if(cartMap.get("productId").equals(String.valueOf(productId))&&
+                                    cartMap.get("productSpecificationId").equals(String.valueOf(productSpecificationId))){
+                                //update quantity
+                                quantity+=Integer.parseInt(cartMap.get("quantity")); //update quantity
+                                //delete old cookie
+                                cookie.setMaxAge(0);
+                                cookie.setPath("/");
+                                response.addCookie(cookie);
+                            }
+                        }
+                    }
+                }
+
+                //add new cookie
                 String pdctSpecStr = objectMapper.writeValueAsString(productSpecification);
                 int currentTime=(int)System.currentTimeMillis();
 

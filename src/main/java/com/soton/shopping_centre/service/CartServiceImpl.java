@@ -34,6 +34,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public Cart queryCartByProductIdAndPSId(Integer userId,Integer pId, Integer psId) {
+        return cartMapper.selectCartByProductIdAndPSId(userId,pId,psId);
+    }
+
+    @Override
     public int addCart(Cart cart) {
         return cartMapper.insert(cart);
     }

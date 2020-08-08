@@ -29,4 +29,8 @@ public interface CartMapper extends BaseMapper<Cart> {
     @ResultMap("cartMap")
     @Select("select * from cart where user_id=#{userId}")
     List<Cart> selectCartsByUserId(@PathVariable Integer userId);
+
+    @ResultMap("cartMap")
+    @Select("select * from cart where user_id=#{userId} and product_id=#{pId} and product_specification_id=#{psId}" )
+    Cart selectCartByProductIdAndPSId(@PathVariable Integer userId,@PathVariable Integer pId,@PathVariable Integer psId);
 }

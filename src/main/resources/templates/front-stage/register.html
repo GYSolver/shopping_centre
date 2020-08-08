@@ -74,43 +74,43 @@
             <div class="row">
                 <div class="offset-lg-3 col-lg-6">
                     <div class="checkout_info mb-20">
-                        <form class="form-row" action="#">
+                        <form class="form-row" th:method="post" th:action="@{/register}">
                             <h5 class="last-title mb-10 text-center">Creat New Account</h5>
                             <div class="col-lg-12 text-left mb-20">
-                                <p class="register-page"> Already have an account? <a href="../login.html">Log in instead!</a></p>
+                                <p class="register-page"> Already have an account? <a th:href="@{/login}">Log in now!</a></p>
+                            </div>
+                            <p class="text-danger" th:text="${err}"></p>
+                            <div class="form_group col-12">
+                                <label class="form-label">Username <span>*</span></label>
+                                <input class="input-form" type="text" name="username" required="">
                             </div>
                             <div class="form_group col-12">
-                                <label class="form-label">First Name <span>*</span></label>
-                                <input class="input-form" type="text">
+                                <label class="form-label">First Name</label>
+                                <input class="input-form" type="text" name="firstName">
                             </div>
                             <div class="form_group col-12">
-                                <label class="form-label">Last Name <span>*</span></label>
-                                <input class="input-form" type="text">
+                                <label class="form-label">Last Name</label>
+                                <input class="input-form" type="text" name="lastName">
                             </div>
                             <div class="form_group col-12">
                                 <label class="form-label">Email Address <span>*</span></label>
-                                <input class="input-form" type="text">
+                                <input class="input-form" type="text" name="email">
                             </div>
                             <div class="form_group col-12">
-                                <label class="form-label">Current Password <span>*</span></label>
-                                <input class="input-form input-login" type="text">
-                                <button class="show-btn">Show</button>
+                                <label class="form-label">Password <span>*</span></label>
+                                <input class="input-form " type="password" name="password" required="">
+                                <!--<button class="show-btn">Show</button>-->
                             </div>
-                            <div class="form_group col-12">
-                                <label class="form-label">New Password <span>*</span></label>
-                                <input class="input-form input-login" type="text">
-                                <button class="show-btn">Show</button>
-                            </div>
-                            <div class="form_group col-12">
+                            <!--<div class="form_group col-12">
                                 <label class="form-label">Confirm Password <span>*</span></label>
-                                <input class="input-form input-login" type="text">
-                                <button class="show-btn">Show</button>
-                            </div>
-                            <div class="form_group col-12 position-relative">
+                                <input class="input-form " type="password" required="">
+                               &lt;!&ndash; <button class="show-btn">Show</button>&ndash;&gt;
+                            </div>-->
+                            <!--<div class="form_group col-12 position-relative">
                                 <label class="form-label">Birthdate (Optional)</label>
                                 <input class="input-form" type="text">
-                            </div>
-                            <div class="form-row">
+                            </div>-->
+                            <!--<div class="form-row">
                                 <div class="form-group col-12">
                                     <div class="form-check">
                                         <div class="custom-checkbox">
@@ -120,8 +120,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
+                            </div>-->
+                            <!--<div class="form-row">
                                 <div class="form-group col-12">
                                     <div class="form-check">
                                         <div class="custom-checkbox">
@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-row mt-20">
                                 <input type="submit" class="btn-secondary" value="Register">
                             </div>

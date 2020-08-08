@@ -16,5 +16,6 @@ public interface UserService {
     public int editUser(User user);
 
     public int registerAdmin();
+    public int registerMember(User user);
 
 }

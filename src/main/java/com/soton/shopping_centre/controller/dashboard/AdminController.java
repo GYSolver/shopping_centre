@@ -1,5 +1,6 @@
 package com.soton.shopping_centre.controller.dashboard;
 
+import com.soton.shopping_centre.pojo.User;
 import com.soton.shopping_centre.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -36,6 +37,11 @@ public class AdminController {
 
     @PostMapping("/login-admin")
     public String onPostLoginAdmin(String username, String password, Model model){
+        User user = userService.queryUserByName(username);
+        if(!user.getRoleName().equals("admin")){
+            model.addAttribute("msg","Only admin can login.");
+            return "/dashboard/login";
+        }
         //get current user
         Subject subject = SecurityUtils.getSubject();
         //package token
@@ -45,11 +51,11 @@ public class AdminController {
             subject.login(token); //login
             return "redirect:/dashboard/";
         } catch (UnknownAccountException e) {
-            model.addAttribute("msg","no username");
+            model.addAttribute("msg","Username not found");
             e.printStackTrace();
             return "/dashboard/login";
         }catch (IncorrectCredentialsException e) {
-            model.addAttribute("msg","wrong password");
+            model.addAttribute("msg","Wrong password");
             e.printStackTrace();
             return "/dashboard/login";
         }

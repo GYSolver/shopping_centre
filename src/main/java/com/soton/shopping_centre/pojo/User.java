@@ -27,7 +27,7 @@ public class User {
     private String address;
     private String postcode;
     private String roleId;
-    public String roleName;
+    private String roleName;
     private String createTime;
     private String updateTime;
 }

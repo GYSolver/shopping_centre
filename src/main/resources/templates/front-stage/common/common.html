@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 <!-- Offcanvas Menu Area Start -->
 <div th:fragment="offcanvas">
@@ -249,8 +250,10 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="settings">
-                                <a href="#" class="drop-toggle">
+                            <shiro:authenticated>
+                                <li class="settings">
+                                    <a th:href="@{/profile}">Hello <shiro:principal property="username"/></a>
+                                    <!--<a href="#" class="drop-toggle">
                                     My Account
                                     <i class="fa fa-angle-down"></i>
                                 </a>
@@ -258,8 +261,23 @@
                                     <li><a href="#">My Account</a></li>
                                     <li><a href="#">Checkout</a></li>
                                     <li><a href="#">Sign In</a></li>
-                                </ul>
-                            </li>
+                                </ul>-->
+                                </li>
+                            </shiro:authenticated>
+                            <shiro:guest>
+                                <li class="settings">
+                                    <a th:href="@{/login}">Login</a>
+                                </li>
+                                <li class="settings">
+                                    <a th:href="@{/register}">Register</a>
+                                </li>
+                            </shiro:guest>
+                            <shiro:authenticated>
+                                <li class="settings">
+                                    <a th:href="@{/logout}">Logout</a>
+                                </li>
+                            </shiro:authenticated>
+
                         </ul>
                     </div>
                 </div>
@@ -273,7 +291,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-6">
                     <div class="logo">
-                        <a href="index.html"><img src="/front-stage/images/logo/pos-circle-logo.jpg" alt="" class="img-fluid"></a>
+                        <a th:href="@{/}"><img src="/front-stage/images/logo/pos-circle-logo.jpg" alt="" class="img-fluid"></a>
                     </div>
                 </div>
                 <div class="col-lg-9 col-6">
@@ -282,135 +300,60 @@
                         <div class="header-menu float-left add-sticky">
                             <div class="sticky-container">
                                 <div class="logo">
-                                    <a href="index.html"><img src="/front-stage/images/logo/pos-circle-logo.jpg" alt="" class="img-fluid"></a>
+                                    <a th:href="@{/}"><img src="/front-stage/images/logo/pos-circle-logo.jpg" alt="" class="img-fluid"></a>
                                 </div>
                                 <nav class="main-menu">
                                     <ul>
-                                        <li><a href="index.html">Home Version 1</a></li>
+                                        <li><a th:href="@{/}">Home</a></li>
                                         <li>
-                                            <a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
+                                            <a th:href="@{/}">Shop <i class="fa fa-angle-down"></i></a>
                                             <div class="mega-menu dropdown">
                                                 <ul class="mega-menu-inner d-flex">
                                                     <li>
                                                         <a href="">Shop Layouts</a>
                                                         <ul>
                                                             <li><a href="shop.html">Shop</a></li>
-                                                            <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                                            <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                            <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                            <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                                            <li><a href="shop-list.html">List View</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
                                                         <a href="">Other Pages</a>
                                                         <ul>
                                                             <li><a href="shopping-cart.html">Cart</a></li>
-                                                            <li><a href="wishlist.html">Wishlist</a></li>
-                                                            <li><a href="checkout.html">Checkout</a></li>
-                                                            <li><a href="my-account.html">My Account</a></li>
-                                                            <li><a href="faq.html">FAQs</a></li>
-                                                            <li><a href="404.html">Error 404</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
                                                         <a href="">Product Types</a>
                                                         <ul>
                                                             <li><a href="product-details.html">Product details</a></li>
-                                                            <li><a href="product-details-external.html">Product external</a></li>
-                                                            <li><a href="product-details-grouped.html">Product grouped</a></li>
-                                                            <li><a href="product-details-variable.html">Product variable</a></li>
-                                                            <li><a href="product-details-bottomtab.html">Tab style - 1</a></li>
-                                                            <li><a href="product-details-lefttab.html">Tab style - 2</a></li>
                                                         </ul>
                                                     </li>
                                                     <li>
                                                         <a href="">Other Product Types</a>
                                                         <ul>
                                                             <li><a href="product-details-righttab.html">Tab style - 3</a></li>
-                                                            <li><a href="product-details-stickyleft.html">Product sticky left</a></li>
-                                                            <li><a href="product-details-stickyright.html">Product sticky right</a></li>
-                                                            <li><a href="product-details-galleryleft.html">Product leftside Gallery</a></li>
-                                                            <li><a href="product-details-galleryright.html">Product rightside Gallery</a></li>
-                                                            <li><a href="product-details-sliderbox.html">Product Sliderbox</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>
                                                 <div class="mega-menu-banner mt-30">
-                                                    <a href="shop.html"><img src="/front-stage/images/bg/custom_banner.jpg" alt=""></a>
+                                                    <a th:href="@{/}"><img src="/front-stage/images/bg/custom_banner.jpg" alt=""></a>
                                                 </div>
                                             </div>
                                         </li>
-                                        <li>
-                                            <a href="#">Blog <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown dropdown-width">
-                                                <li>
-                                                    <a href="blog-grid-right-sidebar.html">Blog Grid<i class="fa fa-angle-right float-right"></i></a>
-                                                    <ul class="sub-dropdown dropdown dropdown-width">
-                                                        <li><a href="blog-grid-right-sidebar.html">Right Sidebar</a></li>
-                                                        <li><a href="blog-grid-left-sidebar.html">Left Sidebar</a></li>
-                                                        <li><a href="blog-grid-fullwidth.html">Full Width</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-list-right-sidebar.html">Blog List<i class="fa fa-angle-right float-right"></i></a>
-                                                    <ul class="sub-dropdown dropdown dropdown-width">
-                                                        <li><a href="blog-list-right-sidebar.html">Right Sidebar</a></li>
-                                                        <li><a href="blog-list-left-sidebar.html">Left Sidebar</a></li>
-                                                        <li><a href="blog-list-fullwidth.html">Full Width</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-details-right-sidebar.html">Blog Single Post<i class="fa fa-angle-right float-right"></i></a>
-                                                    <ul class="sub-dropdown dropdown dropdown-width">
-                                                        <li><a href="blog-details.html">Right Sidebar</a></li>
-                                                        <li><a href="blog-details-left-sidebar.html">Left Sidebar</a></li>
-                                                        <li><a href="blog-details-fullwidth.html">Full Width</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-right-sidebar.html">Standard Blog<i class="fa fa-angle-right float-right"></i></a>
-                                                    <ul class="sub-dropdown dropdown dropdown-width">
-                                                        <li><a href="blog-right-sidebar.html">Right Sidebar</a></li>
-                                                        <li><a href="blog-left-sidebar.html">Left Sidebar</a></li>
-                                                        <li><a href="blog-fullwidth.html">Full Width</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">Pages <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown dropdown-width">
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="shop.html">Shop</a></li>
-                                                <li><a href="product-details.html">Product</a></li>
-                                                <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="compare.html">Compare</a></li>
-                                                <li><a href="contact.html">Contact Us</a></li>
-                                                <li><a href="faq.html">Frequently Question</a></li>
-                                                <li><a href="my-account.html">My Account</a></li>
-                                                <li><a href="login.html">Login</a></li>
-                                                <li><a href="user/register.html">Register</a></li>
-                                                <li><a href="404.html">404 Error</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a th:href="@{/about}">About Us</a></li>
+                                        <li><a th:href="@{/contact}">Contact Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <!-- Main Menu End -->
                         <div class="blockcart">
-                            <a href="#" class="drop-toggle">
+                            <a th:href="@{/cart/}" class="drop-toggle">
                                 <img src="/front-stage/images/cart/cart.png" alt="" class="img-fluid">
                                 <span class="my-cart">My Cart</span>
-                                <span class="count">2</span>
-                                <span class="total-item">$200.00</span>
+                                <!--<span class="count"></span>
+                                <span class="total-item" >£<span></span></span>-->
                             </a>
-                            <div class="cart-dropdown drop-dropdown">
+                            <!--<div class="cart-dropdown drop-dropdown">
                                 <ul>
                                     <li class="mini-cart-details">
                                         <div class="innr-crt-img">
@@ -446,7 +389,7 @@
                                 <div class="checkout-cart">
                                     <a href="checkout.html">Checkout</a>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -813,14 +756,14 @@
                 <div class="col-lg-4">
                     <div class="footer-single-widget">
                         <div class="footer-logo mb-40">
-                            <a href="index.html"><img src="/front-stage/images/logo/pos-circle-logo.jpg" alt=""></a>
+                            <a th:href="@{/}"><img src="/front-stage/images/logo/pos-circle-logo.jpg" alt=""></a>
                         </div>
                         <div class="widget-body">
-                            <p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram.</p>
+                            <p>My project</p>
                             <div class="widget-address mt-30 mb-20">
-                                <p><strong>Address:</strong> 123 Main Street, Anytown, CA 12345 USA.</p>
-                                <p><strong>Number Phone:</strong> (800) 123 456 - (800) 123 456.</p>
-                                <p><strong>Address Email:</strong> support@circleshop.com</p>
+                                <p><strong>Address:</strong> University of Southampton, Hamshire, UK.</p>
+                                <p><strong>Phone:</strong> 0752-xxx-xxx.</p>
+                                <p><strong>Email:</strong> xx@soton.ac.uk</p>
                             </div>
                         </div>
                         <div class="footer_social">
@@ -841,10 +784,9 @@
                                 <h6>Information</h6>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="contact.html"> Contact us</a></li>
-                                        <li><a href="#"> Privecy Policy</a></li>
-                                        <li><a href="#">Terms & Conditions</a></li>
+                                        <li><a th:href="@{/about}">About Us</a></li>
+                                        <li><a th:href="@{/contact}"> Contact us</a></li>
+                                        <li><a th:href="@{/}"> Terms & Conditions</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -855,22 +797,21 @@
                                 <div class="footer_menu">
                                     <ul>
                                         <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Older History</a></li>
-                                        <li><a href="#">Wishlist</a></li>
-                                        <li><a href="#">Newslatter</a></li>
+                                        <li><a href="#">Order History</a></li>
+                                        <li><a th:href="@{/cart}">My Cart</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-6">
                             <div class="widgets_container">
-                                <h6>Find It Fast</h6>
+                                <h6>VIP</h6>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">Desktop</a></li>
-                                        <li><a href="#">Laptop & Mobile</a></li>
-                                        <li><a href="#">Components</a></li>
-                                        <li><a href="#">Terms & Conditions</a></li>
+                                        <li><a th:href="@{/}">About VIP</a></li>
+                                        <li><a th:href="@{/}">VIP Points</a></li>
+                                        <li><a th:href="@{/}">VIP Benefits</a></li>
+                                        <li><a th:href="@{/}">VIP Level Terms</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -880,16 +821,15 @@
                                 <h6>Customer Service</h6>
                                 <div class="footer_menu">
                                     <ul>
-                                        <li><a href="#">Sitemap</a></li>
-                                        <li><a href="#">My Account</a></li>
-                                        <li><a href="#">Contact Us</a></li>
                                         <li><a href="#">Delivery Information</a></li>
+                                        <li><a href="#">Return and Refund</a></li>
+                                        <li><a href="#">Shopping Procedures</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-lg-12">
                             <div class="widget-box mt-30">
                                 <div class="widget-single-box">
@@ -897,48 +837,11 @@
                                     <ul>
                                         <li><a href="#">Order</a></li>
                                         <li><a href="#">Affiliate</a></li>
-                                        <li><a href="#">Marketing</a></li>
-                                        <li><a href="#">Sourcing</a></li>
-                                        <li><a href="#">Gadgets</a></li>
-                                        <li><a href="#">Accessories</a></li>
-                                    </ul>
-                                </div>
-                                <div class="widget-single-box">
-                                    <p><strong>Headphones:</strong></p>
-                                    <ul>
-                                        <li><a href="#">Beats</a></li>
-                                        <li><a href="#">Headphone Bose</a></li>
-                                        <li><a href="#">Headphone Nocx</a></li>
-                                        <li><a href="#">Wireless</a></li>
-                                        <li><a href="#">Headphone</a></li>
-                                        <li><a href="#">Headphone Mini</a></li>
-                                    </ul>
-                                </div>
-                                <div class="widget-single-box">
-                                    <p><strong>Computers:</strong></p>
-                                    <ul>
-                                        <li><a href="#">Mini Laptops</a></li>
-                                        <li><a href="#">Computers</a></li>
-                                        <li><a href="#">Laptop Mouse</a></li>
-                                        <li><a href="#">Laptop Pad</a></li>
-                                        <li><a href="#">GB Laptop</a></li>
-                                        <li><a href="#">XL Laptop</a></li>
-                                    </ul>
-                                </div>
-                                <div class="widget-single-box">
-                                    <p><strong>Camera:</strong></p>
-                                    <ul>
-                                        <li><a href="#">Lense Camera</a></li>
-                                        <li><a href="#">Frame Camera</a></li>
-                                        <li><a href="#">Box Camera</a></li>
-                                        <li><a href="#">Mini Camera</a></li>
-                                        <li><a href="#">XL Camera</a></li>
-                                        <li><a href="#">Point shoot camera</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -951,7 +854,7 @@
                 <div class="col-lg-5 col-md-12 col-12">
                     <div class="footer-bottom-content">
                         <div class="footer-copyright">
-                            <p>Copyright &copy; 2020.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+                            <p>Copyright &copy; 2020. Guoyou Liu All rights reserved.</p>
                         </div>
                     </div>
                 </div>

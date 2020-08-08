@@ -70,4 +70,19 @@ public class UserServiceImpl implements UserService {
         return 0;
     }
 
+    @Override
+    public int registerMember(User user) {
+        if(this.queryUserByName(user.getUsername())==null){
+            String salt = RandomStringUtils.randomNumeric(6);
+            user.setSalt(salt);
+            Md5Hash md5Hash = new Md5Hash(user.getPassword(),salt); //encrypt
+            user.setPassword(md5Hash.toString());
+
+            user.setRoleName("member");
+            return this.addUser(user);
+        }
+        else
+            return -1;//duplicated username
+    }
+
 }

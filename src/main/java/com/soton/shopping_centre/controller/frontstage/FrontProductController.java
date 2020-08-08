@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Controller("front-stage-product")
+@Controller
 //@RequestMapping("/")
-public class ProductController {
+public class FrontProductController {
 
     @Autowired
     ProductService productService;
@@ -31,7 +31,8 @@ public class ProductController {
 
         return "/front-stage/index";
     }
-    @GetMapping("/{productId}")
+
+    @GetMapping("/product-detail/{productId}")
     public String OnGetProductDetailIndex(@PathVariable Integer productId, Model model){
         Product product = productService.queryProductById(productId);
         model.addAttribute("product",product);

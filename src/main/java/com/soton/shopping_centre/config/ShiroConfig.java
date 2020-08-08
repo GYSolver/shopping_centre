@@ -1,5 +1,6 @@
 package com.soton.shopping_centre.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -50,9 +51,15 @@ public class ShiroConfig {
         //filterMap.put("/dashboard","roles[admin]");
 
         bean.setFilterChainDefinitionMap(filterMap);
-        bean.setLoginUrl("/dashboard/login-admin");
+        bean.setLoginUrl("/login");
         //bean.setUnauthorizedUrl("unauthorized");
         return bean;
+    }
+
+    //enable shiro tag
+    @Bean
+    public ShiroDialect getShiroDialect(){
+        return new ShiroDialect();
     }
 
 

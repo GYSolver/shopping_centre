@@ -299,7 +299,7 @@
                             <!-- Single-Product-Start -->
                             <div class="item-product pt-0" >
                                 <div class="product-thumb">
-                                    <a th:href="@{/}+${product.getId()}" th:text="${product.getProductSpecifications().get(0).getImagePath()}">
+                                    <a th:href="@{/product-detail/}+${product.getId()}" th:text="${product.getProductSpecifications().get(0).getImagePath()}">
                                         <!--<img src="front-stage/images/product/product-12.jpg" alt="" class="img-fluid">-->
                                     </a>
                                     <div class="box-label">
@@ -315,7 +315,7 @@
                                 </div>
                                 <div class="product-caption">
                                     <div class="product-name">
-                                        <a th:href="@{/}+${product.getId()}" th:text="${product.getName()}"></a>
+                                        <a th:href="@{/product-detail/}+${product.getId()}" th:text="${product.getName()}"></a>
                                     </div>
                                     <!--<div class="rating">
                                         <span class="yellow"><i class="fa fa-star"></i></span>
