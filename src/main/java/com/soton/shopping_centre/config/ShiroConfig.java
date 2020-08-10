@@ -48,7 +48,7 @@ public class ShiroConfig {
         //授权
         Map<String,String> filterMap = new LinkedHashMap<>();
         //anon-匿名访问 直接放行； authc-需要认证（登录）；perms-需要权限； roles-需要角色
-        //filterMap.put("/dashboard","roles[admin]");
+        filterMap.put("/checkout","roles[member]");
 
         bean.setFilterChainDefinitionMap(filterMap);
         bean.setLoginUrl("/login");

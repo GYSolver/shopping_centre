@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-public interface CartService {
+public interface CartService  {
     public List<Cart> queryAllCarts();
     public Cart queryCartById(Integer id);
     public List<Cart> queryCartsByUserId(Integer userId);

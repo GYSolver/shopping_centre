@@ -15,19 +15,26 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@TableName("product_specification")
-public class ProductSpecification {
+@TableName("`order`")
+public class Order {
     @TableId(type= IdType.AUTO)
     private int id;
-    private int productId;
-    private String specification;
-    private int price;
-    private int stock;
-    private String imagePath;
+    private int itemsCount;
+    private int totalPrice;
+    private String status;
+    private String paymentInfo;
+    private String address;
+    private String postcode;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private int userId;
+    private String username;
     private String createTime;
     private String updateTime;
 
     @TableField(exist = false)
-    private Product product;
+    private List<OrderDetail> orderDetails;
 
 }

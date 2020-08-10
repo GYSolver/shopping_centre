@@ -252,6 +252,9 @@
                             </li>
                             <shiro:authenticated>
                                 <li class="settings">
+                                    <a th:href="@{/my-orders}">My Orders</a>
+                                </li>
+                                <li class="settings">
                                     <a th:href="@{/profile}">Hello <shiro:principal property="username"/></a>
                                     <!--<a href="#" class="drop-toggle">
                                     My Account

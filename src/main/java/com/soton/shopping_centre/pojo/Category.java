@@ -25,5 +25,5 @@ public class Category {
     private String updateTime;
 
     @TableField(exist = false)
-    List<Specification> specifications;
+    private List<Specification> specifications;
 }

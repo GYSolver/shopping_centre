@@ -1,13 +1,8 @@
 package com.soton.shopping_centre.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.soton.shopping_centre.mapper.CategoryMapper;
 import com.soton.shopping_centre.mapper.ProductMapper;
 import com.soton.shopping_centre.mapper.UserMapper;
-import com.soton.shopping_centre.pojo.Category;
-import com.soton.shopping_centre.pojo.Product;
-import com.soton.shopping_centre.pojo.Specification;
-import com.soton.shopping_centre.pojo.User;
+import com.soton.shopping_centre.pojo.*;
 import com.soton.shopping_centre.service.CategoryService;
 import com.soton.shopping_centre.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;

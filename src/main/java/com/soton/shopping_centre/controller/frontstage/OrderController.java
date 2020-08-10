@@ -1,0 +1,171 @@
+package com.soton.shopping_centre.controller.frontstage;
+
+import com.soton.shopping_centre.pojo.*;
+import com.soton.shopping_centre.service.*;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Controller
+public class OrderController {
+    @Autowired
+    OrderService orderService;
+    @Autowired
+    OrderDetailService orderDetailService;
+
+    @Autowired
+    CartService cartService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    ProductSpecificationService productSpecificationService;
+
+
+    @GetMapping("/checkout")
+    public String onGetCheckout(Model model){
+        //get current user
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        model.addAttribute("user",user);
+
+        List<Cart> carts = cartService.queryCartsByUserId(user.getId());
+        //check stock
+        boolean hasErr=false;
+        Map<String,String> errMap=new HashMap<>();
+        for(Cart cart:carts){
+            ProductSpecification pdctSpecDb = productSpecificationService.queryPdctSpecById(cart.getProductSpecificationId());
+            ProductSpecification pdctSpecCart = cart.getProductSpecification();
+            if(pdctSpecDb==null){
+                errMap.put("err", pdctSpecCart.getProduct().getName()+pdctSpecCart.getSpecification()+"is unavailable, please reselect.");
+                hasErr=true;
+            }
+            else if(cart.getQuantity()>pdctSpecDb.getStock()){
+                errMap.put("err",pdctSpecCart.getProduct().getName()+pdctSpecCart.getSpecification()+"is out of stock, please reselect.");
+                hasErr=true;
+            }
+        }
+        if(hasErr){
+            model.addAllAttributes(errMap);
+            return "/front-stage/cart";
+        }
+        else {
+            model.addAttribute("carts", carts);
+            return "/front-stage/checkout";
+        }
+    }
+    @PostMapping("/checkout")
+    public String onPostCheckout(String[] addr,User user,Model model){
+        StringBuilder address = new StringBuilder();
+        for(String s:addr){
+            address.append(s).append('+');
+        }
+        user.setAddress(address.substring(0,address.length()-1));
+        userService.editUser(user);
+        model.addAttribute("user",user);
+        List<Cart> carts = cartService.queryCartsByUserId(user.getId());
+        model.addAttribute("carts",carts);
+        return "/front-stage/payment";
+    }
+
+    @PostMapping("/payment")
+    public String onPostPayment(String[] card,Integer userId, Model model){
+        if(card.length>=2){
+            StringBuilder cardInfo = new StringBuilder();
+            for(String s:card){
+                cardInfo.append(s).append('+');
+            }
+
+            User user = userService.queryUserById(userId);
+            List<Cart> carts = cartService.queryCartsByUserId(userId);
+            model.addAttribute("carts",carts);
+
+            Order order = new Order();
+            orderService.addOrder(order);
+            int orderId = order.getId();
+            int totalPrice=0,itemsCount=0;
+            for(Cart cart:carts){
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.setOrderId(orderId);
+                orderDetail.setProductId(cart.getProductId());
+                orderDetail.setProductName(cart.getProductSpecification().getProduct().getName());
+                orderDetail.setProductSpecification(cart.getProductSpecification().getSpecification());
+                orderDetail.setQuantity(cart.getQuantity());
+                orderDetail.setPrice(cart.getProductSpecification().getPrice());
+                orderDetailService.addOrderDetail(orderDetail);
+
+                totalPrice+=(orderDetail.getQuantity()*orderDetail.getPrice());
+                itemsCount+=cart.getQuantity();
+
+                //clear cart
+                cartService.deleteCartById(cart.getId());
+
+                //update stock
+                ProductSpecification productSpecification = cart.getProductSpecification();
+                int stock = productSpecification.getStock();
+                productSpecification.setStock(stock - orderDetail.getQuantity());
+                productSpecificationService.editPdctSpec(productSpecification);
+            }
+            order.setItemsCount(itemsCount);
+            order.setTotalPrice(totalPrice);
+            order.setStatus("paid");
+            order.setPaymentInfo(cardInfo.substring(0,cardInfo.length()-1));
+            order.setAddress(user.getAddress());
+            order.setPostcode(user.getPostcode());
+            order.setFirstName(user.getFirstName());
+            order.setLastName(user.getLastName());
+            order.setEmail(user.getEmail());
+            order.setPhoneNumber(user.getPhoneNumber());
+            order.setUserId(user.getId());
+            order.setUsername(user.getUsername());
+            orderService.editOrder(order);
+            return "redirect:/my-orders";
+        }
+        else{
+            model.addAttribute("err","Please check your payment information.");
+            return "/front-stage/payment";
+        }
+    }
+
+    @GetMapping("/my-orders")
+    public String onGetAllOrders(Model model){
+        //get current user
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        if(user!=null){
+            List<Order> orders = orderService.queryOrdersByUserId(user.getId());
+            model.addAttribute("orders",orders);
+            return "/front-stage/my-orders";
+        }
+        else
+            return "/front-stage/404";
+
+    }
+
+    @PostMapping("/delete-order/{id}")
+    public String onPostDeleteOrder(@PathVariable Integer id,Model model){
+        //get current user
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        if(user!=null){
+            orderService.deleteOrderById(id);
+            return "redirect:/my-orders";
+        }
+        else
+            return "/front-stage/404";
+
+    }
+
+
+}

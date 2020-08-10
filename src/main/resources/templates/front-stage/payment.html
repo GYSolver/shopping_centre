@@ -1,0 +1,203 @@
+<!doctype html>
+<html class="no-js" lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/front-stage/images/favicon.ico">
+
+    <!-- CSS
+	============================================ -->
+
+    <!-- Vendor CSS (Bootstrap & Icon Font) -->
+    <!-- <link rel="stylesheet" href="/front-stage/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/front-stage/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="/front-stage/css/vendor/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/front-stage/css/vendor/animate.min.css"> -->
+    <!-- Plugins CSS (All Plugins Files) -->
+    <!-- <link rel="stylesheet" href="/front-stage/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="/front-stage/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="/front-stage/css/plugins/plugins.css">
+    <link rel="stylesheet" href="/front-stage/css/style.css"> -->
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <link rel="stylesheet" href="/front-stage/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="/front-stage/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="/front-stage/css/style.min.css">
+
+</head>
+
+<body>
+
+    <!-- Offcanvas Menu Area Start -->
+    <div th:replace="~{front-stage/common/common::offcanvas}"></div>
+    <!--Offcanvas Menu Area End-->
+
+    <!-- Header Area Start -->
+    <div th:replace="~{front-stage/common/common::header}"></div>
+    <!-- Header Area  End -->
+
+    <!--=====================
+    Breadcrumb Aera Start
+    =========================-->
+    <div class="breadcrumbs_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <li>
+                                <h1><a href="index.html">Home</a></h1>
+                            </li>
+                            <li>Checkout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=====================
+    Breadcrumb Aera End
+    =========================-->
+
+    <!--======================
+    Checkout area Start
+    ==========================-->
+    <div class="checkout-area mt-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <form class="form-row" th:method="post" th:action="@{/payment}">
+                        <div class="col-lg-12">
+                            <h5 class="form-head">Payment Infomation</h5>
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-12">
+                            <div class="payment">
+                                <img src="/front-stage/images/payment/payment.png" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <input class="input-form" name="userId" th:value="${user.getId()}" type="text" hidden="">
+                        <div class="form_group col-12">
+                            <label class="form-label">Card Number<span>*</span></label>
+                            <input placeholder="House number and street name" name="card" class="input-form" type="text">
+                        </div>
+                        <div class="form_group col-12">
+                            <label class="form-label">Security Code<span>*</span></label>
+                            <input class="input-form" name="card" type="text">
+                        </div>
+                        <div class="form-row justify-content-end mt-20 mb-20">
+                            <input type="submit" class="btn-secondary" value="Place Order">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <form class="form-row">
+                        <div class="col-lg-12">
+                            <h5 class="form-head rs-padding">Your Order</h5>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="order_table table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Specification</th>
+                                        <th>Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="cart:${carts}">
+                                        <td th:text="${cart.getProductSpecification().getProduct().getName()}"><strong> ×<span th:text="${cart.getQuantity()}"></span></strong></td>
+                                        <td th:text="${cart.getProductSpecification().getSpecification()}"></td>
+                                        <td id="product-total-val" th:text="${cart.getProductSpecification().getPrice()*cart.getQuantity()}"></td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr><th></th></tr>
+                                    <tr>
+                                        <th><h6>Cart Subtotal</h6></th>
+                                        <td><h6>£<span id="subtotal"></span></h6></td>
+                                    </tr>
+                                    <tr>
+                                        <th><h6>Shipping</h6></th>
+                                        <td><h6>£<span id="shipping-fee">5</span></h6></td>
+                                    </tr>
+                                    <tr class="order_total">
+                                        <th><h6>Order Total</h6></th>
+                                        <td><h6>£<span id="total"></span></h6></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--======================
+    Checkout area End
+    ==========================-->
+
+    <!--footer area start -->
+    <div th:replace="~{front-stage/common/common::footer}"></div>
+    <!--footer area end -->
+
+    <!-- Scroll To Top Start -->
+    <a class="scroll-to-top" href=""><i class="fa fa-angle-up"></i></a>
+    <!-- Scroll To Top End -->
+
+    <!-- modal area start-->
+    <div th:replace="~{front-stage/common/common::modal}"></div>
+    <!-- modal area end-->
+
+    <!-- Vendors JS -->
+    <!--<script src="/front-stage/js/vendor/jquery-3.4.1.min.js"></script>
+<script src="/front-stage/js/vendor/jquery-migrate-3.1.0.min.js"></script>
+<script src="/front-stage/js/vendor/modernizr-3.8.0.min.js"></script>
+<script src="/front-stage/js/vendor/bootstrap.min.js"></script> -->
+    <!-- Plugins JS -->
+    <!-- <script src="/front-stage/js/plugins/plugins.js"></script>
+<script src="/front-stage/js/plugins/jquery.ui.js"></script>
+<script src="/front-stage/js/plugins/jquery.ajaxchimp.min.js"></script>
+<script src="/front-stage/js/plugins/jquery.magnific-popup.min.js"></script>
+<script src="/front-stage/js/plugins/slick.min.js"></script>
+<script src="/front-stage/js/plugins/modal.min.js"></script>
+<script src="/front-stage/js/plugins/sticky-sidebar.min.js"></script>
+<script src="/front-stage/js/plugins/countdown.min.js"></script>
+<script src="/front-stage/js/plugins/jquery.nice-select.min.js"></script> -->
+
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <script src="/front-stage/js/vendor/vendor.min.js"></script>
+    <script src="/front-stage/js/plugins/plugins.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="/front-stage/js/main.js"></script>
+
+    <!--calculate total fees-->
+    <script>
+        $( function(){
+            var productTotals=$('#product-total-val');
+            var subtotal=0;
+            for(var i=0;i<productTotals.length;i++){
+                if(productTotals[i].tagName=="TD"){
+                    subtotal+=(parseInt(productTotals[i].textContent));
+                }
+            }
+            $('#subtotal').text(subtotal);
+            var total=subtotal+parseInt($('#shipping-fee').text());
+            $('#total').text(total);
+            return false;
+        } );
+    </script>
+
+</body>
+
+</html>
