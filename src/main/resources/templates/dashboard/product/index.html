@@ -67,6 +67,7 @@
                                     <th scope="col">Category</th>
                                     <!--<th scope="col">Create Time</th>
                                     <th scope="col">Update Time</th>-->
+                                    <th scope="col">Image</th>
                                     <th scope="col">options</th>
                                     <th scope="col">specifications</th>
                                 </tr>
@@ -77,6 +78,7 @@
                                     <td th:text="${product.getName()}"></td>
                                     <td th:text="${product.getBrand()}"></td>
                                     <td th:text="${product.getCategory().getName()}"></td>
+                                    <td><img style="height: 80px; width: 80px;" th:src="${product.getImagePath()}"></td>
                                     <!--<td th:text="${product.getCreateTime()}"></td>
                                     <td th:text="${product.getUpdateTime()}"></td>-->
                                     <td>
@@ -92,7 +94,6 @@
                                                 <th scope="col">Specifications</th>
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Stock</th>
-                                                <th scope="col">Image</th>
                                                 <th scope="col">Update Time</th>
                                                 <th scope="col">options</th>
                                             </tr>
@@ -103,7 +104,6 @@
                                                 <td th:text="${pdctSpec.getSpecification()}"></td>
                                                 <td th:text="${pdctSpec.getPrice()}"></td>
                                                 <td th:text="${pdctSpec.getStock()}"></td>
-                                                <td th:text="${pdctSpec.getImagePath()}"></td>
                                                 <td th:text="${pdctSpec.getUpdateTime()}"></td>
                                                 <td>
                                                     <a class="btn btn-xs btn-info" th:href="@{/dashboard/pdctSpec/edit/}+${pdctSpec.getId()}">edit</a>

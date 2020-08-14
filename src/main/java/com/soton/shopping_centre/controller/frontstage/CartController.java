@@ -96,7 +96,7 @@ public class CartController {
 
             }
 
-           carts = cartService.queryAllCarts();
+           carts = cartService.queryCartsByUserId(user.getId());
         }
         model.addAttribute("carts",carts);
         return "/front-stage/cart";

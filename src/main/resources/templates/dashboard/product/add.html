@@ -59,7 +59,7 @@
                     <div class="card">
                         <h5 class="card-header">Add Product</h5>
                         <div class="card-body">
-                            <form th:action="@{/dashboard/product/add}" th:method="post" class="" id="basicform" data-parsley-validate="">
+                            <form th:action="@{/dashboard/product/add}" th:method="post" id="basicform" data-parsley-validate="" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="inputProductName">Product Name</label>
                                     <input id="inputProductName" type="text" name="name" data-parsley-trigger="change" required="" placeholder="Enter product name" autocomplete="off" class="form-control">
@@ -69,12 +69,22 @@
                                     <input id="inputBrand" type="text" name="brand" data-parsley-trigger="change" required="" placeholder="Enter brand" autocomplete="off" class="form-control">
                                 </div>
                                 <div class="form-group">
+                                    <!--<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">-->
+                                    <label for="inputImage'+count+'">Upload Image
+                                        <input type="file" class="sr-only uploadImage" id="inputImage'+count+'" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff" onchange="display(this)">
+                                        <p class="btn btn-upload fa fa-upload"></p>
+                                    </label>
+                                    <img style="height: 80px; width: 80px;" src="/dashboard/images/avatar-1.jpg" id="displayImg" alt="image"/>
+                                    <!--</div>-->
+                                </div>
+                                <div class="form-group">
                                     <label for="inputCategory">Category</label>
                                     <select id="inputCategory" onchange="QuerySpecifications()" name="categoryId" data-parsley-trigger="change" required="" autocomplete="off" class="form-control" >
                                         <option   value=""   selected>Select a category</option>
                                         <option   th:each="category:${categories}" th:value="${category.getId()}"  th:text="${category.getName()}" ></option>
                                     </select>
                                 </div>
+
                                 <div class="form-group" id="addSpecBtn"></div>
                                 <div class="form-group" id="selectors"></div>
 
@@ -151,6 +161,7 @@
 <script>
     var specifications;
     var container=$("#selectors");
+
     function QuerySpecifications(){
         var categoryId =  $("#inputCategory").find("option:selected").val();
         $.ajax({
@@ -187,12 +198,13 @@
 
     $("body").on("click","#removeRow", function(e){ //user click on remove text
         if(count>0 ) {
-            $(this).parent('div').parent('div').remove(); //remove text box
+            $(this).parent('div').parent('div').parent('div').remove(); //remove text box
             count--;
         }
         return false;
     });
 
+    //add specification
     function createSpecificationRow(hasDeleteBtn){
         var content='';
 
@@ -212,14 +224,23 @@
             content+='</select>' +
                 '</div>';
         }
-        content+= ('<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">'
-            +'<label for="inputName">price</label>'
-            +'<input id="inputName" type="text" name="price" data-parsley-trigger="change" required="" placeholder="Enter Price" autocomplete="off" class="form-control">'
+        content+= (
+            '<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">'
+                +'<label for="inputName">price</label>'
+                +'<input id="inputName" type="text" name="price" data-parsley-trigger="change" required="" placeholder="Enter Price" autocomplete="off" class="form-control">'
             +'</div>'+
             '<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">'
-            +'<label for="inputStock">stock</label>'
-            +'<input id="inputStock" type="text" name="stock" data-parsley-trigger="change" required="" placeholder="Enter Price" autocomplete="off" class="form-control">'
-            +'</div>');
+                +'<label for="inputStock">stock</label>'
+                +'<input id="inputStock" type="text" name="stock" data-parsley-trigger="change" required="" placeholder="Enter Price" autocomplete="off" class="form-control">'
+            +'</div>'
+          /*  +'<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2">'
+                +'<label for="inputImage'+count+'">Upload Image'
+                +'<input type="file" class="sr-only uploadImage" id="inputImage'+count+'" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff" onchange="display(this)">'
+                +'<p class="btn btn-upload fa fa-upload"></p>'
+                +'</label>'
+                +'<img src="" id="displayImg" alt="image"/> '
+            +'</div>'*/
+        );
         if(hasDeleteBtn){
             content+=('<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 mb-2" ><p/>' +
                 '<a href="#" id="removeRow" class="btn btn-xs btn-danger">Delete</a>' +
@@ -230,6 +251,21 @@
         count++;
         return false;
     }
+
+    function display(obj){
+        var filePath = $(obj).val();
+        var fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+        // format validation
+        if (!fileFormat.match(/.png|.jpg|.jpeg/)) {
+            error_prompt_alert('format must be png/jpg/jpeg');
+            return;
+        }
+        var src = window.URL.createObjectURL(obj.files[0]);
+        //alert(src);
+
+        $("#displayImg").attr('src', src);
+    }
+
 </script>
 </body>
 

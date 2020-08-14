@@ -1,6 +1,8 @@
 package com.soton.shopping_centre.controller.frontstage;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soton.shopping_centre.mapper.UserMapper;
 import com.soton.shopping_centre.pojo.User;
 import com.soton.shopping_centre.service.UserService;
@@ -25,6 +27,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    ObjectMapper objectMapper;
 
     @GetMapping("/register")
     public String onGetRegisterMember(){return "/front-stage/register";}
@@ -40,7 +44,6 @@ public class UserController {
             model.addAttribute("err","Username has been registered.");
             return "/front-stage/register";
         }
-        model.addAttribute("err","Username has been registered.");
         return "/front-stage/login";
     }
 
@@ -50,12 +53,13 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String onPostLoginMember(String username, String password, Model model){
+    public String onPostLoginMember(String username, String password,String rememberMe, Model model){
         //get current user
         Subject subject = SecurityUtils.getSubject();
         //package token
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
-
+        if(rememberMe!=null)
+            token.setRememberMe(rememberMe.equals("on"));
         try {
             subject.login(token); //login
             return "redirect:/";
@@ -78,5 +82,58 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/my-account")
+    public String onGetMyAccount(Model model) throws JsonProcessingException {
+        //get current user
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        model.addAttribute("user",user);
 
+        String addrDb = user.getAddress();
+        String[] addr;
+        if(!addrDb.equals(""))
+            addr = objectMapper.readValue(addrDb, String[].class);
+        else
+            addr = new String[6];
+
+        model.addAttribute("addr",addr);
+        return "/front-stage/my-account";
+    }
+
+    @PostMapping("/edit-profile")
+    public String onPostProfile(User user,String[] addr) throws JsonProcessingException {
+        user.setAddress(objectMapper.writeValueAsString(addr));
+        userService.editUser(user);
+
+        Subject subject = SecurityUtils.getSubject();
+        User userShiro = (User) subject.getPrincipal();
+
+        userShiro.setFirstName(user.getFirstName());
+        userShiro.setLastName(user.getLastName());
+        userShiro.setAddress(user.getAddress());
+        return "redirect:/my-account";
+    }
+
+    @PostMapping("/edit-pwd")
+    public String onPostPwd(User user,String password,String passwordConfirm,Model model){
+        Subject subject = SecurityUtils.getSubject();
+        User userShiro = (User) subject.getPrincipal();
+
+        if(!password.equals("")){
+            if(password.equals(passwordConfirm)){
+                String salt = RandomStringUtils.randomNumeric(6);
+                user.setSalt(salt);
+                userShiro.setSalt(salt);
+                Md5Hash md5Hash = new Md5Hash(user.getPassword(),salt); //encrypt
+                user.setPassword(md5Hash.toString());
+                userShiro.setPassword(md5Hash.toString());
+            }
+            else {
+                model.addAttribute("err","Please enter the same password");
+                return "/front-stage/my-account";
+            }
+        }
+        userService.editUser(user);
+        return "redirect:/my-account";
+    }
 }

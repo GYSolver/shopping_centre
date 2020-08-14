@@ -299,8 +299,8 @@
                             <!-- Single-Product-Start -->
                             <div class="item-product pt-0" >
                                 <div class="product-thumb">
-                                    <a th:href="@{/product-detail/}+${product.getId()}" th:text="${product.getProductSpecifications().get(0).getImagePath()}">
-                                        <!--<img src="front-stage/images/product/product-12.jpg" alt="" class="img-fluid">-->
+                                    <a th:href="@{/product-detail/}+${product.getId()}">
+                                        <img style="height: 214px; width: 214px;" th:src="${product.getImagePath()}" alt="" class="img-fluid">
                                     </a>
                                     <div class="box-label">
                                         <!--<div class="label-product-new">
@@ -325,40 +325,13 @@
                                         <span class="yellow"><i class="fa fa-star"></i></span>
                                     </div>-->
                                     <div class="price-box">
-                                        <span class="regular-price" th:text="${product.getProductSpecifications().get(0).getPrice()}"></span>
+                                        <span class="regular-price" th:text="'£'+${product.getProductSpecifications().get(0).getPrice()}"></span>
                                         <!--<span class="old-price"><del>$350.50</del></span>-->
                                     </div>
                                     <!--<div class="cart">
                                         <div class="add-to-cart">
                                             <a href="cart.html" title="Add to cart"><i class="zmdi zmdi-shopping-cart-plus zmdi-hc-fw"></i></a>
                                         </div>
-                                    </div>-->
-                                </div>
-                                <div class="grid-list-caption align-items-center">
-                                    <!--<div class="product-name">
-                                        <a href="product-detail.html">Natus erro at congue massa commodo sit dignissim</a>
-                                    </div>
-                                    <div class="rating">
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                    </div>
-                                    <div class="price-box">
-                                        <span class="regular-price">$80.00</span>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed</p>
-                                    <div class="text-available">
-                                        <p><strong>Availabe:</strong><span> 99 In Stock</span></p>
-                                    </div>
-                                    <div class="action-link">
-                                        <a class="quick-view same-link" href="#" title="Quick view" data-toggle="modal" data-target="#modal_box" data-original-title="quick view"><i class="zmdi zmdi-eye zmdi-hc-fw"></i></a>
-                                        <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
-                                        <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
-                                    </div>
-                                    <div class="cart-list-button">
-                                        <a href="shopping-cart.html" class="cart-btn">Add To Cart</a>
                                     </div>-->
                                 </div>
                             </div>

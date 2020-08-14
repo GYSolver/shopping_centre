@@ -1,5 +1,7 @@
 package com.soton.shopping_centre.controller.frontstage;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soton.shopping_centre.pojo.*;
 import com.soton.shopping_centre.service.*;
 import org.apache.shiro.SecurityUtils;
@@ -13,10 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class OrderController {
@@ -31,6 +30,8 @@ public class OrderController {
     UserService userService;
     @Autowired
     ProductSpecificationService productSpecificationService;
+    @Autowired
+    ObjectMapper objectMapper;
 
 
     @GetMapping("/checkout")
@@ -66,12 +67,8 @@ public class OrderController {
         }
     }
     @PostMapping("/checkout")
-    public String onPostCheckout(String[] addr,User user,Model model){
-        StringBuilder address = new StringBuilder();
-        for(String s:addr){
-            address.append(s).append('+');
-        }
-        user.setAddress(address.substring(0,address.length()-1));
+    public String onPostCheckout(String[] addr,User user,Model model) throws JsonProcessingException {
+        user.setAddress(objectMapper.writeValueAsString(addr));
         userService.editUser(user);
         model.addAttribute("user",user);
         List<Cart> carts = cartService.queryCartsByUserId(user.getId());
@@ -80,13 +77,8 @@ public class OrderController {
     }
 
     @PostMapping("/payment")
-    public String onPostPayment(String[] card,Integer userId, Model model){
+    public String onPostPayment(String[] card,Integer userId, Model model) throws JsonProcessingException {
         if(card.length>=2){
-            StringBuilder cardInfo = new StringBuilder();
-            for(String s:card){
-                cardInfo.append(s).append('+');
-            }
-
             User user = userService.queryUserById(userId);
             List<Cart> carts = cartService.queryCartsByUserId(userId);
             model.addAttribute("carts",carts);
@@ -120,7 +112,7 @@ public class OrderController {
             order.setItemsCount(itemsCount);
             order.setTotalPrice(totalPrice);
             order.setStatus("paid");
-            order.setPaymentInfo(cardInfo.substring(0,cardInfo.length()-1));
+            order.setPaymentInfo(objectMapper.writeValueAsString(card));
             order.setAddress(user.getAddress());
             order.setPostcode(user.getPostcode());
             order.setFirstName(user.getFirstName());

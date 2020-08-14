@@ -96,14 +96,15 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="cart:${carts}">
-                                            <td class="product-image"><a href="#"><img th:src="${cart.getProductSpecification().getImagePath()}" alt=""></a></td>
+                                            <td class="product-image"><a href="#"><img style="height: 80px; width: 80px;" th:src="${cart.getProductSpecification().getProduct().getImagePath()}" class="img-fluid" alt="" /></a></td>
                                             <td class="product-name"><a href="#" th:text="${cart.getProductSpecification().getProduct().getName()}"></a></td>
                                             <td class="product-specification"><a href="#" th:text="${cart.getProductSpecification().getSpecification()}"></a></td>
                                             <td class="product-price" th:text="${cart.getProductSpecification().getPrice()}"></td>
-                                            <td class="product-quantity">
+                                            <td class="product-quantity" th:text="${cart.getQuantity()}"></td>
+                                            <!--<td class="product-quantity">
                                                 <label>Quantity</label>
-                                                <label><input min="1" max="100" th:value="${cart.getQuantity()}" type="number"></label>
-                                            </td>
+                                                <label><input min="1" th:max="${cart.getProductSpecification().getStock()}" th:value="${cart.getQuantity()}" type="number" onchange="updateTotal(this)"></label>
+                                            </td>-->
                                             <td class="product-total-val" th:text="${cart.getQuantity() * cart.getProductSpecification().getPrice()}"></td>
                                             <td class="product-remove"><a href="javascript:void(0);" th:onclick="'confirmDelete('+${cart.getId()}+');'"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
@@ -223,6 +224,17 @@
     <!--calculate total fees-->
     <script>
         $( function(){
+            calculateTotal();
+            return false;
+        } );
+
+        function updateTotal(obj){
+            var price = $(obj).parent("label").parent("td").parent("tr").children("td.product-price").text();
+            var quantiy=$(obj).val();
+            $(obj).parent("label").parent("td").parent("tr").children("td.product-total-val").text(price*quantiy);
+            calculateTotal();
+        }
+        function calculateTotal(){
             var productTotals=$('.product-total-val');
             var subtotal=0;
             for(var i=0;i<productTotals.length;i++){
@@ -234,8 +246,7 @@
 
             var total=subtotal+parseInt($('#shipping-fee').text());
             $('#total').text(total);
-            return false;
-        } );
+        }
     </script>
 
 </body>

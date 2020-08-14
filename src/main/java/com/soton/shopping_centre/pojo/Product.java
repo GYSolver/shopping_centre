@@ -23,7 +23,7 @@ public class Product {
     private String name;
     private String brand;
     private int categoryId;
-    private String image_path;
+    private String imagePath;
     private String createTime;
     private String updateTime;
 

@@ -59,7 +59,7 @@
                     <div class="card">
                         <h5 class="card-header">Edit a Product</h5>
                         <div class="card-body">
-                            <form th:action="@{/dashboard/product/edit}" th:method="post" id="basicform" data-parsley-validate="">
+                            <form th:action="@{/dashboard/product/edit}" th:method="post" id="basicform" data-parsley-validate="" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <input type="text" th:value="${product.getId()}" name="id" class="form-control" hidden>
                                     <input type="text" th:value="${product.getCategoryId()}" name="categoryId" class="form-control" hidden>
@@ -71,6 +71,13 @@
                                 <div class="form-group">
                                     <label for="inputBrand">Brand</label>
                                     <input id="inputBrand"  th:value="${product.getBrand()}" type="text" name="brand" data-parsley-trigger="change" placeholder="Enter category name" autocomplete="off" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputImage">Change Image
+                                        <input type="file" class="sr-only uploadImage" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff" onchange="display(this)">
+                                        <p class="btn btn-upload fa fa-upload"></p>
+                                    </label>
+                                    <img style="height: 80px; width: 80px;" th:src="${product.getImagePath()}" id="displayImg" alt="image"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputCategory">Category</label>
@@ -114,6 +121,22 @@
 <script src="/dashboard/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 <script src="/dashboard/vendor/slimscroll/jquery.slimscroll.js"></script>
 <script src="/dashboard/libs/js/main-js.js"></script>
+
+<script>
+    function display(obj){
+        var filePath = $(obj).val();
+        var fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
+        // format validation
+        if (!fileFormat.match(/.png|.jpg|.jpeg/)) {
+            error_prompt_alert('format must be png/jpg/jpeg');
+            return;
+        }
+        var src = window.URL.createObjectURL(obj.files[0]);
+        //alert(src);
+
+        $("#displayImg").attr('src', src);
+    }
+</script>
 </body>
 
 </html>

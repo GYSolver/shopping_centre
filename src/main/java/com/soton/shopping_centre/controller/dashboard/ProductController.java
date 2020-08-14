@@ -13,11 +13,13 @@ import com.soton.shopping_centre.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -55,12 +57,28 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String onPostAdd(Product product,int[] specificationId,int[] price,int[] stock) throws JsonProcessingException {
+    public String onPostAdd(Product product, int[] specificationId, int[] price, int[] stock, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
         if(product!=null&&product.getName()!=null&&price!=null&&stock!=null){
+            //store image
+            //String path = request.getServletContext().getRealPath("/");
+            String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath();
+            staticPath=staticPath.replace("%20"," ");
+            File absPath = new File(staticPath+"\\upload");
+            if (!absPath.exists()) {
+                absPath.mkdirs();
+            }
+            String timeStamp=System.currentTimeMillis() + file.getOriginalFilename();
+            String absPathStr=absPath +"\\"+timeStamp;
+
+            file.transferTo(new File(absPathStr));
+            product.setImagePath("/upload/"+timeStamp);
             productService.addProduct(product);
+
+            //store specifications
             String jsonStr=null;
             //serialize specifications
             for(int i=0;i<price.length;i++){
+                //specification
                 if(specificationId!=null) {
                     HashMap<String,String> specMap = new HashMap<>();
                     for (int j = 0; j < specificationId.length / price.length; j++) {
@@ -69,6 +87,7 @@ public class ProductController {
                     }
                     jsonStr = objectMapper.writeValueAsString(specMap);
                 }
+
                 ProductSpecification productSpecification=new ProductSpecification();
                 productSpecification.setProductId(product.getId());
                 productSpecification.setSpecification(jsonStr);
@@ -84,15 +103,22 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     public String onGetEdit(@PathVariable Integer id, Model model){
-        //category
         Product product = productService.queryProductById(id);
         model.addAttribute("product",product);
         return "/dashboard/product/edit";
     }
 
     @PostMapping("/edit")
-    public String onPostEdit(Product product){
+    public String onPostEdit(Product product,@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
         if(product!=null&&product.getName()!=null){
+            //change image
+            String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath();
+            staticPath=staticPath.replaceAll("%20"," ");
+            File absPath = new File(staticPath);
+
+            String relPathStr=productService.queryProductById(product.getId()).getImagePath().replace("/","\\");
+            String absPathStr=absPath+relPathStr;
+            file.transferTo(new File(absPathStr));
             productService.editProduct(product);
             return "redirect:/dashboard/product/";
         }
@@ -103,8 +129,18 @@ public class ProductController {
 
     @PostMapping("/delete/{id}")
     public String onPostDelete(@PathVariable Integer id){
+        //delete image
+        String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath();
+        staticPath=staticPath.replaceAll("%20"," ");
+
+        String relPathStr=productService.queryProductById(id).getImagePath();
+        String absPathStr=staticPath+relPathStr;
+        File file = new File(absPathStr);
+        if(file.exists())
+            file.delete();
+
+        //delete database record        //productSpecifications are also deleted in ProductService
         productService.deleteProductById(id);
-        //productSpecifications are also deleted in ProductService
         return "redirect:/dashboard/product/";
     }
 }

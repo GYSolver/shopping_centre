@@ -1,6 +1,7 @@
 package com.soton.shopping_centre.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soton.shopping_centre.mapper.CartMapper;
 import com.soton.shopping_centre.pojo.Cart;
 import com.soton.shopping_centre.pojo.Category;
@@ -13,6 +14,7 @@ import java.util.List;
 public class CartServiceImpl implements CartService {
     @Autowired
     CartMapper cartMapper;
+
 
     @Override
     public List<Cart> queryAllCarts() {

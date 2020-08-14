@@ -73,21 +73,21 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-2">
                     <ul class="nav flex-column dashboard-list mb-20" role="tablist">
-                        <li><a class="nav-link" data-toggle="tab" href="#dashboard">Dashboard</a></li>
-                        <li><a class="nav-link active show" data-toggle="tab" href="#orders">Orders</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#downloads">Downloads</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#address">Addresses</a></li>
-                        <li><a class="nav-link" data-toggle="tab" href="#account-details">Account details</a></li>
-                        <li><a class="nav-link" href="login.html">logout</a></li>
+                        <!--<li><a class="nav-link" data-toggle="tab" href="#dashboard">Dashboard</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#orders">Orders</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#downloads">Downloads</a></li>-->
+                        <li><a class="nav-link active show" data-toggle="tab" href="#account-details">Account details</a></li>
+                        <li><a class="nav-link" data-toggle="tab" href="#security">Security</a></li>
+                        <li><a class="nav-link" th:href="@{/logout}">logout</a></li>
                     </ul>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-10">
                     <!-- Tab panes -->
                     <div class="tab-content dashboard-content mb-20">
-                        <div id="dashboard" class="tab-pane fade">
+                        <!--<div id="dashboard" class="tab-pane fade">
                             <h3 class="last-title">Dashboard </h3>
                             <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a></p>
-                        </div> <!-- end of tab-pane -->
+                        </div> &lt;!&ndash; end of tab-pane &ndash;&gt;
                         <div id="orders" class="tab-pane fade active show">
                             <h3 class="last-title">Orders</h3>
                             <div class="table-responsive">
@@ -119,7 +119,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div> <!-- end of tab-pane -->
+                        </div> &lt;!&ndash; end of tab-pane &ndash;&gt;
                         <div id="downloads" class="tab-pane fade">
                             <h3 class="last-title">Downloads</h3>
                             <div class="table-responsive">
@@ -148,7 +148,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div> <!-- end of tab-pane -->
+                        </div> &lt;!&ndash; end of tab-pane &ndash;&gt;
                         <div id="address" class="tab-pane">
                             <p>The following addresses will be used on the checkout page by default.</p>
                             <h4 class="billing-address">Billing address</h4>
@@ -158,64 +158,89 @@
                         </address>
                                 <p>HasTech</p>
                                 <p>Bangladesh</p>
-                        </div> <!-- end of tab-pane -->
-                        <div id="account-details" class="tab-pane fade">
-                            <h3 class="last-title">Account details </h3>
+                        </div> &lt;!&ndash; end of tab-pane &ndash;&gt;-->
+                        <div id="account-details" class="tab-pane fade active show">
                             <div class="checkout_info">
-                                <form class="form-row" action="#">
-                                    <div class="col-lg-12 text-left mb-20">
-                                        <p class="register-page"> Already have an account? <a href="login.html">Log in instead!</a></p>
+                                <form class="form-row" th:method="post" th:action="@{/edit-profile}">
+                                    <h3 class="last-title">Account Details </h3>
+                                    <input class="input-form" name="id" th:value="${user.getId()}" type="text" hidden>
+                                    <div class="form_group col-12 col-lg-12">
+                                        <label class="form-label">Username</label>
+                                        <input class="input-form" name="username" th:value="${user.getUsername()}" type="text" disabled="">
                                     </div>
                                     <div class="form_group col-12 col-lg-6">
-                                        <label class="form-label">First Name <span>*</span></label>
-                                        <input class="input-form" type="text">
+                                        <label class="form-label">First Name</label>
+                                        <input class="input-form" name="firstName" th:value="${user.getFirstName()}" type="text">
                                     </div>
                                     <div class="form_group col-12 col-lg-6">
-                                        <label class="form-label">Last Name <span>*</span></label>
-                                        <input class="input-form" type="text">
+                                        <label class="form-label">Last Name</label>
+                                        <input class="input-form" name="lastName" th:value="${user.getLastName()}" type="text">
                                     </div>
                                     <div class="form_group col-12">
-                                        <label class="form-label">Email Address <span>*</span></label>
-                                        <input class="input-form" type="text">
+                                        <label class="form-label">Email Address</label>
+                                        <input class="input-form" name="email" th:value="${user.getEmail()}" type="text">
+                                    </div>
+                                    <h3 class="last-title">Shipping Details</h3>
+                                    <input class="input-form" name="id" th:value="${user.getId()}" type="text" hidden="">
+                                    <div class="form_group col-12">
+                                        <label class="form-label">Street Address <span>*</span></label>
+                                        <input placeholder="House number and street name" name="addr" th:value="${addr[0]}" class="input-form" type="text">
+                                    </div>
+                                    <div class="form_group col-12">
+                                        <input placeholder="Apartment, suite, unit etc. (optional)" name="addr" th:value="${addr[1]}" class="input-form" type="text">
+                                    </div>
+                                    <div class="form_group col-12">
+                                        <label class="form-label">Town / City <span>*</span></label>
+                                        <input class="input-form" name="addr" th:value="${addr[2]}" type="text">
+                                    </div>
+                                    <div class="form_group col-12">
+                                        <label class="form-label">State / County <span>*</span></label>
+                                        <input class="input-form" name="addr" th:value="${addr[3]}" type="text">
+                                    </div>
+                                    <div class="form_group col-12">
+                                        <label class="form-label" for="state">Country <span>*</span></label>
+                                        <select class="niceselect-option nice-select select-option" name="addr" id="state">
+                                            <option value="1" th:selected="${addr[4]}=='1'">UK</option>
+                                            <option value="2" th:selected="${addr[4]}=='2'">China</option>
+                                            <option value="3" th:selected="${addr[4]}=='3'">US</option>
+                                            <option value="4" th:selected="${addr[4]}=='4'">Japan</option>
+                                            <option value="5" th:selected="${addr[4]}=='5'">Korea</option>
+                                            <option value="6" th:selected="${addr[4]}=='6'">Albania</option>
+                                            <option value="7" th:selected="${addr[4]}=='7'">Bahrain</option>
+                                            <option value="8" th:selected="${addr[4]}=='8'">Colombia</option>
+                                            <option value="9" th:selected="${addr[4]}=='9'">Dominican Republic</option>
+                                        </select>
+                                    </div>
+                                    <div class="form_group col-12">
+                                        <label class="form-label">Postcode<span>*</span></label>
+                                        <input class="input-form" name="addr" th:value="${addr[5]}" type="text">
+                                    </div>
+                                    <div class="form-row mt-20">
+                                        <input type="submit" class="btn-secondary" value="Update">
+                                    </div>
+                                </form>
+                            </div>
+                        </div> <!-- end of tab-pane -->
+                        <div id="security" class="tab-pane fade">
+                            <h3 class="last-title">Change Password</h3>
+                            <div class="checkout_info">
+                                <form class="form-row" th:method="post" th:action="@{/edit-pwd}" onsubmit="return onFormSubmit()">
+                                    <input class="input-form" name="id" th:value="${user.getId()}" type="text" hidden>
+                                    <p id="err" style="color: red;font-weight: bold" th:text="${err}"></p>
+                                    <div class="form_group col-12 col-lg-12">
+                                        <label class="form-label">Username</label>
+                                        <input class="input-form" name="username" th:value="${user.getId()}" type="text" disabled="">
                                     </div>
                                     <div class="form_group col-12 col-lg-6">
                                         <label class="form-label">New Password <span>*</span></label>
-                                        <input class="input-form input-login" type="text">
-                                        <button class="show-btn">Show</button>
+                                        <input id="newPwd" class="input-form input-login" name="password" type="text" required>
                                     </div>
                                     <div class="form_group col-12 col-lg-6">
                                         <label class="form-label">Confirm Password <span>*</span></label>
-                                        <input class="input-form input-login" type="text">
-                                        <button class="show-btn">Show</button>
-                                    </div>
-                                    <div class="form_group col-12 position-relative">
-                                        <label class="form-label">Birthdate (Optional)</label>
-                                        <input class="input-form" type="text">
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-12">
-                                            <div class="form-check">
-                                                <div class="custom-checkbox">
-                                                    <input class="form-check-input" type="checkbox" id="agree-condition">
-                                                    <span class="checkmark"></span>
-                                                    <label class="form-check-label" for="agree-condition">Receive Offers From Our Partners</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-12">
-                                            <div class="form-check">
-                                                <div class="custom-checkbox">
-                                                    <input class="form-check-input" type="checkbox" id="agree-condition-2">
-                                                    <span class="checkmark"></span>
-                                                    <label class="form-check-label" for="agree-condition-2">Sign Up For Our Newsletter <br> Subscribe To Our Newsletters Now And Stay Up-To-Date With New Collections, The Latest Lookbooks And Exclusive Offers..</label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <input id="confirmPwd" class="input-form input-login" name="passwordConfirm" type="text" required>
                                     </div>
                                     <div class="form-row mt-20">
-                                        <input type="submit" class="btn-secondary" value="Register">
+                                        <input type="submit" class="btn-secondary" value="Update">
                                     </div>
                                 </form>
                             </div>
@@ -270,6 +295,20 @@
 
     <!-- Main JS -->
     <script src="front-stage/js/main.js"></script>
+
+    <script>
+
+        function onFormSubmit(){
+            //password  validation
+            var newPassword=$("#newPwd").val();
+            var confirmPassword=$("#confirmPwd").val();
+            if(newPassword!=confirmPassword){
+                alert("Please enter the same password.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 
 </body>
 
