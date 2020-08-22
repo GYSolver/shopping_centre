@@ -36,5 +36,13 @@ public interface ProductMapper extends BaseMapper<Product> {
 
     //@ResultMap("productMap")
     @Select("select * from product where category_id=#{cid}")
-    List<Product> selectProductByCategoryId(Integer cid);
+    List<Product> selectProductsByCategoryId(Integer cid);
+
+    @ResultMap("productMap")
+    @Select("select * from product where category_id=#{cid} and name like concat('%',#{pName},'%')")
+    List<Product> selectProductsByCategoryIdAndProductName(Integer cid,String pName);
+
+    @ResultMap("productMap")
+    @Select("select * from product where name like concat('%',#{pName},'%') ")
+    List<Product> selectProductsByProductName(String pName);
 }

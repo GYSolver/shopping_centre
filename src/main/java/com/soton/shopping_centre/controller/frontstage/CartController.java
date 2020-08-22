@@ -22,10 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cart")
@@ -110,7 +107,7 @@ public class CartController {
             int productSpecificationId = 0;
             String jsonStr = null;
             if (specificationId.length > 0) {
-                HashMap<String, String> specMap = new HashMap<>();
+                HashMap<String, String> specMap = new LinkedHashMap<>();
                 for (int value : specificationId) {
                     Specification specification = specificationService.querySpecificationById(value);
                     specMap.put(specification.getName(), specification.getValue());
@@ -118,7 +115,7 @@ public class CartController {
                 jsonStr = objectMapper.writeValueAsString(specMap);
 
                 List<ProductSpecification> productSpecifications = productSpecificationService.queryPdctSpecByProductId(productId);
-                Map<String, Integer> specifications = new HashMap<>();
+                Map<String, Integer> specifications = new LinkedHashMap<>();
                 for (ProductSpecification ps : productSpecifications) {
                     specifications.put(ps.getSpecification(), ps.getId());
                 }
@@ -133,7 +130,7 @@ public class CartController {
                 productSpecificationId = productSpecification.getId();
             }
 
-            //has logged in: storage in db; else: storage in cookie;
+            //has logged in: storage in db; else: store in cookie;
             Subject currentUser = SecurityUtils.getSubject();
             User user = (User) currentUser.getPrincipal();
             if (currentUser.isAuthenticated()) {

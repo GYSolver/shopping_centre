@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,7 @@ public class ProductSpecificationController {
             //serialize specifications
             String jsonStr=null;
             if(specificationId!=null){
-                HashMap<String,String> specMap = new HashMap<>();
+                HashMap<String,String> specMap = new LinkedHashMap<>();
                 for(int i=0;i<specificationId.length;i++){
                     Specification specification = specificationService.querySpecificationById(specificationId[i]);
                     specMap.put(specification.getName(),specification.getValue());
@@ -85,7 +86,7 @@ public class ProductSpecificationController {
         model.addAttribute("productSpecification",productSpecification);
 
         String specification = productSpecification.getSpecification();
-        HashMap<String,String> specMap = specification.equals("") ?null:objectMapper.readValue(specification, HashMap.class);
+        HashMap<String,String> specMap = specification.equals("") ?null:objectMapper.readValue(specification, LinkedHashMap.class);
         model.addAttribute("specMap",specMap);
 
         Category category = productService.queryProductById(productSpecification.getProductId()).getCategory();
@@ -102,7 +103,7 @@ public class ProductSpecificationController {
         if(productSpecification!=null){
             String jsonStr=null;
             if(specificationId!=null){
-                HashMap<String,String> specMap = new HashMap<>();
+                HashMap<String,String> specMap = new LinkedHashMap<>();
                 for(int i=0;i<specificationId.length;i++){
                     Specification specification = specificationService.querySpecificationById(specificationId[i]);
                     specMap.put(specification.getName(),specification.getValue());

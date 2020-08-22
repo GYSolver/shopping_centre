@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
@@ -80,7 +81,7 @@ public class ProductController {
             for(int i=0;i<price.length;i++){
                 //specification
                 if(specificationId!=null) {
-                    HashMap<String,String> specMap = new HashMap<>();
+                    HashMap<String,String> specMap = new LinkedHashMap<>();
                     for (int j = 0; j < specificationId.length / price.length; j++) {
                         Specification specification = specificationService.querySpecificationById(specificationId[i * (specificationId.length / price.length) + j]);
                         specMap.put(specification.getName(), specification.getValue());

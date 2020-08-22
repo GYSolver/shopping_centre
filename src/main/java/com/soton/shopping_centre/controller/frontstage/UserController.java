@@ -48,12 +48,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String onGetLoginMember(){
+    public String onGetLogin(){
         return "/front-stage/login";
     }
 
     @PostMapping("/login")
-    public String onPostLoginMember(String username, String password,String rememberMe, Model model){
+    public String onPostLogin(String username, String password, String rememberMe, Model model){
         //get current user
         Subject subject = SecurityUtils.getSubject();
         //package token
@@ -62,7 +62,14 @@ public class UserController {
             token.setRememberMe(rememberMe.equals("on"));
         try {
             subject.login(token); //login
-            return "redirect:/";
+            User user = (User) subject.getPrincipal();
+            if(user.getRoleName().equals("admin"))
+                return "redirect:/dashboard/";
+            if(user.getRoleName().equals("member"))
+                return "redirect:/";
+
+            model.addAttribute("err","No such role");
+            return "/front-stage/login";
         } catch (UnknownAccountException e) {
             model.addAttribute("err","Username not found.");
             e.printStackTrace();
@@ -136,4 +143,7 @@ public class UserController {
         userService.editUser(user);
         return "redirect:/my-account";
     }
+
+    @GetMapping("/unauthorized")
+    public String onGetUnauthorizedPage(){return "/front-stage/unauthorized";}
 }

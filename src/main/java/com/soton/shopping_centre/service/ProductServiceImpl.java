@@ -43,7 +43,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> queryProductsByCategoryId(Integer cid) {
-        return productMapper.selectProductByCategoryId(cid);
+        return productMapper.selectProductsByCategoryId(cid);
+    }
+
+    @Override
+    public List<Product> queryProductsByCategoryIdAndProductName(Integer cid, String pName) {
+        /*QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("product.name",pName);
+        if(cid!=0){
+            queryWrapper.eq("product.categoryId",cid);
+        }*/
+        if(cid==0){
+            return productMapper.selectProductsByProductName(pName);
+        }
+        else{
+            return productMapper.selectProductsByCategoryIdAndProductName(cid,pName);
+        }
     }
 
     @Override

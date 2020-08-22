@@ -133,7 +133,7 @@
                             </ul>
                         </div>
                         <div class="price-box">
-                            <span class="regular-price" th:text="${productSpecifications.get(0).getPrice()}"></span>
+                            <span id="price" class="regular-price" th:text="'£'+${productSpecifications.get(0).getPrice()}"></span>
                         </div>
                         <div class="product-description">
                             <p th:text="${product.getBrand()}"></p>

@@ -39,20 +39,22 @@ public class ShiroConfig {
 
     //shiroFilterFactoryBean
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("getDefaultWebSecurityManager") DefaultWebSecurityManager securityManager){
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(
+            @Qualifier("getDefaultWebSecurityManager") DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
-        //设置安全管理器
         bean.setSecurityManager(securityManager);
 
-        //添加shiro内置过滤器
-        //授权
         Map<String,String> filterMap = new LinkedHashMap<>();
-        //anon-匿名访问 直接放行； authc-需要认证（登录）；perms-需要权限； roles-需要角色
-        filterMap.put("/checkout","roles[member]");
+        filterMap.put("/dashboard","roles[admin]");
+
+        filterMap.put("/front-stage/checkout","roles[member]");
+        filterMap.put("/front-stage/payment","roles[member]");
+        filterMap.put("/front-stage/my-account","roles[member]");
+        filterMap.put("/front-stage/my-orders","roles[member]");
 
         bean.setFilterChainDefinitionMap(filterMap);
         bean.setLoginUrl("/login");
-        //bean.setUnauthorizedUrl("unauthorized");
+        bean.setUnauthorizedUrl("/unauthorized");
         return bean;
     }
 
