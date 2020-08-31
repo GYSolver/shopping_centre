@@ -64,7 +64,7 @@ public class UserController {
             subject.login(token); //login
             User user = (User) subject.getPrincipal();
             if(user.getRoleName().equals("admin"))
-                return "redirect:/dashboard/";
+                return "redirect:/dashboard/stock/";
             if(user.getRoleName().equals("member"))
                 return "redirect:/";
 

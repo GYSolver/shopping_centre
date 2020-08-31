@@ -19,7 +19,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
     @Override
     public OrderDetail queryOrderDetailById(Integer id) {
-        return null;
+        return orderDetailMapper.selectById(id);
     }
 
     @Override

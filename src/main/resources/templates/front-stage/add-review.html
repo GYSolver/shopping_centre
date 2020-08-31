@@ -11,7 +11,8 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/front-stage/images/favicon.ico">
 
-    <!-- CSS============================================ -->
+    <!-- CSS
+	============================================ -->
 
     <!-- Vendor CSS (Bootstrap & Icon Font) -->
     <!-- <link rel="stylesheet" href="/front-stage/css/vendor/bootstrap.min.css">
@@ -51,9 +52,10 @@
                     <div class="breadcrumb_content">
                         <ul>
                             <li>
-                                <h1><a th:href="@{/}">Home</a></h1>
+                                <h1><a href="index.html">Home</a></h1>
                             </li>
-                            <li>404</li>
+                            <li>My Orders</li>
+                            <li>Add a Review</li>
                         </ul>
                     </div>
                 </div>
@@ -61,28 +63,64 @@
         </div>
     </div>
     <!--=====================
-        Breadcrumb Aera End
+    Breadcrumb Aera End
     =========================-->
 
-    <!-- ================
-    404 Area Start
-    =====================-->
-    <div class="error_page_start">
+    <!--======================
+    My Account area Start
+    ==========================-->
+    <div class="my-account-area mt-50">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>OOPS! PAGE NOT BE FOUND</h2>
-                    <p>Sorry but the page you are looking for does not exist, have been removed, name changed or is temporarity unavailable.</p>
-                    <div class="hom_btn">
-                        <a th:href="@{/}" class="btn-secondary">Back to home page</a>
-                    </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="checkout_info">
+                    <form class="form-row" th:method="post" th:action="@{/review/add}">
+                        <h3 class="last-title">Add a Review for This Item:</h3>
+                        <input class="input-form" name="id" th:value="${orderDetail.getId()}" type="text" hidden>
+                        <input class="input-form" name="orderId" th:value="${orderDetail.getOrderId()}" type="text" hidden>
+                        <input class="input-form" name="productId" th:value="${orderDetail.getProductId()}" type="text" hidden>
+                        <div class="form_group col-12 col-lg-12">
+                            <label class="form-label">Product Name</label>
+                            <input class="input-form" name="productName" th:value="${orderDetail.getProductName()}" type="text" readonly="">
+                        </div>
+                        <div class="form_group col-12 col-lg-12">
+                            <label class="form-label">Product Specification</label>
+                            <input class="input-form" name="productSpecification" th:value="${orderDetail.getProductSpecification()}" type="text" readonly="">
+                        </div>
+                        <div class="form_group col-12 col-lg-6">
+                            <label class="form-label">Rating</label>
+                            <select class="niceselect-option nice-select select-option" name="rating" id="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form_group col-12 col-lg-6">
+                            <label class="form-label">General Review</label>
+                            <input class="input-form" name="generalReview" type="text">
+                        </div>
+                        <div class="form_group col-12 col-lg-12">
+                            <label class="form-label" for="detailedReview">Detailed Review </label>
+                            <textarea class="input-form" name="detailedReview" id="detailedReview" spellcheck="false" data-gramm="false" ></textarea>
+                        </div>
+
+
+                        <div class="form-row mt-20">
+                            <input type="submit" class="btn-secondary" value="Update">
+                            <button class="btn btn-space btn-info" onclick="history.back(-1);return false;">Cancel</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ================
-    404 Area End
-    =====================-->
+    <!--======================
+    My Account area End
+    ==========================-->
+
+
+
 
     <!--footer area start -->
     <div th:replace="~{/front-stage/common/common::footer}"></div>
@@ -97,9 +135,8 @@
     <!-- modal area end-->
 
 
-
-
     <!-- JS============================================ -->
+
     <!-- Vendors JS -->
     <!--<script src="/front-stage/js/vendor/jquery-3.4.1.min.js"></script>
 <script src="/front-stage/js/vendor/jquery-migrate-3.1.0.min.js"></script>
@@ -123,6 +160,20 @@
 
     <!-- Main JS -->
     <script src="/front-stage/js/main.js"></script>
+
+    <script>
+
+        function onFormSubmit(){
+            //password  validation
+            var newPassword=$("#newPwd").val();
+            var confirmPassword=$("#confirmPwd").val();
+            if(newPassword!=confirmPassword){
+                alert("Please enter the same password.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 
 </body>
 

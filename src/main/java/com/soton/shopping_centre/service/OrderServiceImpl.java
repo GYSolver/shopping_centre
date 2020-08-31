@@ -17,7 +17,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> queryAllOrders() {
-        return orderMapper.selectList(null);
+        return orderMapper.selectAllOrders();
     }
 
     @Override

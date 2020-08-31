@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
  
 <head>
     <!-- Required meta tags -->
@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/static/dashboard/vendor/bootstrap/css/bootstrap.min.css">
-    <link href="/static/dashboard/vendor/fonts/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/dashboard/libs/css/style.css">
-    <link rel="stylesheet" href="/static/dashboard/vendor/fonts/fontawesome/css/fontawesome-all.css">
+    <link rel="stylesheet" href="/dashboard/vendor/bootstrap/css/bootstrap.min.css">
+    <link href="/dashboard/vendor/fonts/circular-std/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dashboard/libs/css/style.css">
+    <link rel="stylesheet" href="/dashboard/vendor/fonts/fontawesome/css/fontawesome-all.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
                 <!-- brand logo -->
                 <!-- ============================================================== -->
                 <div class="dashboard-nav-brand">
-                    <a class="dashboard-logo" href="../index.html">Concept</a>
+                    <a class="dashboard-logo" href="../index.html">G.</a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- end brand logo -->
@@ -45,11 +45,9 @@
                 <div class="row">
                     <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12">
                         <div class="error-section">
-                            <img src="/static/dashboard/images/error-img.png" alt="" class="img-fluid">
                             <div class="error-section-content">
                                 <h1 class="display-3">Page Not Found</h1>
-                                <p> The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-                                <a href="../index.html" class="btn btn-secondary btn-lg">Back to homepage</a>
+                                <a th:href="@{/dashboard/stock/}" class="btn btn-secondary btn-lg">Back to homepage</a>
                             </div>
                         </div>
                     </div>
@@ -62,7 +60,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-dark text-center">
-                            Copyright © 2018 Concept. All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>.
+                            Copyright © 2018 Guoyou Liu. All rights reserved.
                         </div>
                     </div>
                 </div>
@@ -85,10 +83,10 @@
     <!-- end main wrapper -->
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
-    <script src="/static/dashboard/vendor/jquery/jquery-3.3.1.min.js"></script>
-    <script src="/static/dashboard/vendor/bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="/static/dashboard/vendor/slimscroll/jquery.slimscroll.js"></script>
-    <script src="/static/dashboard/libs/js/main-js.js"></script>
+    <script src="/dashboard/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/dashboard/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/dashboard/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="/dashboard/libs/js/main-js.js"></script>
 </body>
  
 </html>

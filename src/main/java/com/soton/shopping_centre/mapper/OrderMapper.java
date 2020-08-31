@@ -33,6 +33,10 @@ public interface OrderMapper extends BaseMapper<Order> {
     @Select("select * from `order` where user_id=#{userId}")
     List<Order> selectOrdersByUserId(@PathVariable Integer userId);
 
+    @ResultMap("orderMap")
+    @Select("select * from `order`")
+    List<Order> selectAllOrders();
+
     /*@ResultMap("orderMap")
     @Select("select * from cart order user_id=#{userId} and product_id=#{pId} and product_specification_id=#{psId}" )
     Order selectOrderByProductIdAndPSId(@PathVariable Integer userId,@PathVariable Integer pId,@PathVariable Integer psId);*/

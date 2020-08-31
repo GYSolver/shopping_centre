@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 
 
 <!-- ============================================================== -->
 <!-- navbar -->
 <!-- ============================================================== -->
 <nav class="navbar navbar-expand-lg bg-white fixed-top" th:fragment="navbar">
-        <a class="navbar-brand" href="../index.html">Concept</a>
+        <a class="navbar-brand" href="../index.html">UoS Shop</a> Management System
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto navbar-right-top">
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <div id="custom-search" class="top-search-bar">
                         <input class="form-control" type="text" placeholder="Search..">
                     </div>
@@ -108,7 +109,21 @@
                         <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
                     </div>
+                </li>-->
+                <li shiro:hasRole="admin" class="nav-item settings" >
+                    <a href="#"><i class="fas fa-user mr-2"></i>Hello <b><shiro:principal property="username"/></b> ! &nbsp</a>
                 </li>
+                <li shiro:hasRole="admin" class="nav-item settings">
+                    <a th:href="@{/logout}">&nbsp<i class="fas fa-power-off mr-2"></i>Logout &nbsp</a>
+                </li>
+                <shiro:guest>
+                    <li class="settings">
+                        <a th:href="@{/login}">Login</a>
+                    </li>
+                    <!--<li class="settings">
+                        <a th:href="@{/register}">Register</a>
+                    </li>-->
+                </shiro:guest>
             </ul>
         </div>
 </nav>
@@ -120,7 +135,7 @@
 <!-- left sidebar -->
 <!-- ============================================================== -->
 <nav class="navbar navbar-expand-lg navbar-light" th:fragment="sidebar">
-    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+    <a class="d-xl-none d-lg-none" href="#">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -129,14 +144,23 @@
             <li class="nav-divider">
                 Menu
             </li>
-            <li class="nav-item ">
+            <!--<li class="nav-item ">
                 <a th:class="${active=='dashboard'?'nav-link active':'nav-link'}" href="/dashboard/" ><i class="fas fa-chart-line"></i>Dashboard</a>
+            </li>-->
+            <li class="nav-item ">
+                <a th:class="${active=='stock'?'nav-link active':'nav-link'}" href="/dashboard/stock/" ><i class="fas fa-chart-line"></i>Stock</a>
             </li>
             <li class="nav-item ">
                 <a th:class="${active=='category'?'nav-link active':'nav-link'}" href="/dashboard/category/" ><i class="fas fa-th"></i>Category</a>
             </li>
             <li class="nav-item ">
                 <a th:class="${active=='product'?'nav-link active':'nav-link'}" href="/dashboard/product/" ><i class="fas fa-boxes"></i>Product</a>
+            </li>
+            <li class="nav-item ">
+                <a th:class="${active=='order'?'nav-link active':'nav-link'}" href="/dashboard/order/" ><i class="fas fa-file-alt"></i>Order</a>
+            </li>
+            <li class="nav-item ">
+                <a th:class="${active=='user'?'nav-link active':'nav-link'}" href="/dashboard/user/" ><i class="fas fa-user"></i>User</a>
             </li>
         </ul>
     </div>

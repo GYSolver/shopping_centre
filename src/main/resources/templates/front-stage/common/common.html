@@ -246,7 +246,7 @@
                                         <a href="#"><img src="/front-stage/images/cuntry/1.jpg" alt=""> English</a>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="/front-stage/images/cuntry/2.jpg" alt=""> Francis</a>
+                                        <a href="#"><img src="/front-stage/images/cuntry/2.jpg" alt=""> Chinese</a>
                                     </li>
                                 </ul>
                             </li>
@@ -255,7 +255,7 @@
                                     <a th:href="@{/my-orders}">My Orders</a>
                                 </li>
                                 <li class="settings">
-                                    <a th:href="@{/my-account}">Hello <shiro:principal property="username"/></a>
+                                    <a th:href="@{/my-account}">Hello <b><shiro:principal property="username"/></b> !</a>
                                     <!--<a href="#" class="drop-toggle">
                                     My Account
                                     <i class="fa fa-angle-down"></i>
@@ -308,7 +308,7 @@
                                 <nav class="main-menu">
                                     <ul>
                                         <li><a th:href="@{/}">Home</a></li>
-                                        <li>
+                                        <!--<li>
                                             <a th:href="@{/}">Shop <i class="fa fa-angle-down"></i></a>
                                             <div class="mega-menu dropdown">
                                                 <ul class="mega-menu-inner d-flex">
@@ -341,13 +341,14 @@
                                                     <a th:href="@{/}"><img src="/front-stage/images/bg/custom_banner.jpg" alt=""></a>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li><a th:href="@{/about}">About Us</a></li>
-                                        <li><a th:href="@{/contact}">Contact Us</a></li>
+                                        </li>-->
+                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">Contact Us</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
+                        <div><a th:href="@{/}"><img src="/front-stage/images/logo/uos-logo.jpg" alt="" class="img-fluid"></a></div>
                         <!-- Main Menu End -->
                         <div class="blockcart">
                             <a th:href="@{/cart/}" class="drop-toggle">

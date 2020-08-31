@@ -20,10 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/dashboard/product")
@@ -112,14 +109,16 @@ public class ProductController {
     @PostMapping("/edit")
     public String onPostEdit(Product product,@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
         if(product!=null&&product.getName()!=null){
-            //change image
-            String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath();
-            staticPath=staticPath.replaceAll("%20"," ");
-            File absPath = new File(staticPath);
+            if(!Objects.equals(file.getOriginalFilename(), "")){
+                //change image
+                String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath();
+                staticPath=staticPath.replaceAll("%20"," ");
+                File absPath = new File(staticPath);
 
-            String relPathStr=productService.queryProductById(product.getId()).getImagePath().replace("/","\\");
-            String absPathStr=absPath+relPathStr;
-            file.transferTo(new File(absPathStr));
+                String relPathStr=productService.queryProductById(product.getId()).getImagePath().replace("/","\\");
+                String absPathStr=absPath+relPathStr;
+                file.transferTo(new File(absPathStr));
+            }
             productService.editProduct(product);
             return "redirect:/dashboard/product/";
         }

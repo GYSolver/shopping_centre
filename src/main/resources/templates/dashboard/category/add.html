@@ -65,10 +65,10 @@
                                     <label for="inputCategoryName">Category Name</label>
                                     <input id="inputCategoryName" type="text" name="name" data-parsley-trigger="change" required="" placeholder="Enter category name" autocomplete="off" class="form-control">
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label for="inputImage">Upload Image</label>
                                     <input id="inputImage" type="text" name="imagePath" data-parsley-trigger="change" required="" placeholder="Enter image" autocomplete="off" class="form-control">
-                                </div>
+                                </div>-->
 
                                 <a href="#" id="addRow" class="btn btn-info">Add a specification</a>
                                 <div id="InputsWrapper"></div>
@@ -77,7 +77,7 @@
                                     <div class="col-sm-6 pl-0">
                                         <p class="text-right">
                                             <button type="submit" class="btn btn-space btn-primary">Submit</button>
-                                            <button class="btn btn-space btn-secondary" onclick="history.back(-1);">Cancel</button>
+                                            <button class="btn btn-space btn-secondary" onclick="history.back(-1);return false;">Cancel</button>
                                         </p>
                                     </div>
                                 </div>

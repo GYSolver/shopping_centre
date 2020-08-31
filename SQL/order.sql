@@ -3,21 +3,21 @@ CREATE TABLE `order` (
     items_count INT UNSIGNED NOT NULL,
     total_price INT UNSIGNED NOT NULL,
     
-    `status` VARCHAR(20) NOT NULL DEFAULT '',
-    payment_info VARCHAR(20) NOT NULL DEFAULT '',
+    `status` VARCHAR(50) NOT NULL DEFAULT '',
+    payment_info VARCHAR(50) NOT NULL DEFAULT '',
     address VARCHAR(100) NOT NULL DEFAULT '',
-    postcode VARCHAR(20) NOT NULL DEFAULT '',
-    first_name VARCHAR(30) NOT NULL DEFAULT '',
-    last_name VARCHAR(30) NOT NULL DEFAULT '',
+    postcode VARCHAR(50) NOT NULL DEFAULT '',
+    first_name VARCHAR(50) NOT NULL DEFAULT '',
+    last_name VARCHAR(50) NOT NULL DEFAULT '',
     email VARCHAR(50) NOT NULL DEFAULT '',
-    phone_number VARCHAR(20) NOT NULL DEFAULT '',
-	username VARCHAR(30) NOT NULL DEFAULT '',
+    phone_number VARCHAR(50) NOT NULL DEFAULT '',
+	username VARCHAR(50) NOT NULL DEFAULT '',
 	user_id INT UNSIGNED NOT NULL,
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 );
-CREATE TABLE `order` (
+CREATE TABLE `order_detail` (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     order_id INT UNSIGNED NOT NULL,
     product_id INT UNSIGNED NOT NULL,

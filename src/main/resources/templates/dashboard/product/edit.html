@@ -80,6 +80,10 @@
                                     <img style="height: 80px; width: 80px;" th:src="${product.getImagePath()}" id="displayImg" alt="image"/>
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-label" for="Detail">Detail</label>
+                                    <textarea class="input-form" name="detail" id="Detail" th:value="${product.getDetail()}" spellcheck="false" data-gramm="false" ></textarea>
+                                </div>
+                                <div class="form-group">
                                     <label for="inputCategory">Category</label>
                                     <input id="inputCategory"  th:value="${product.getCategory().getName()}" type="text" name="" data-parsley-trigger="change" placeholder="Enter category name" autocomplete="off" class="form-control" disabled>
                                 </div>

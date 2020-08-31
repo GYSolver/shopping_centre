@@ -141,7 +141,7 @@ public class OrderController {
             return "/front-stage/my-orders";
         }
         else
-            return "/front-stage/404";
+            return "/front-stage/unauthorized";
 
     }
 
@@ -155,7 +155,7 @@ public class OrderController {
             return "redirect:/my-orders";
         }
         else
-            return "/front-stage/404";
+            return "/front-stage/unauthorized";
 
     }
 

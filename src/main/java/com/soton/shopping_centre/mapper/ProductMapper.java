@@ -16,6 +16,8 @@ public interface ProductMapper extends BaseMapper<Product> {
             @Result(property = "name",column = "name"),
             @Result(property = "brand",column = "brand"),
             @Result(property = "categoryId",column = "category_id"),
+            @Result(property = "imagePath",column = "image_path"),
+            @Result(property = "detail",column = "detail"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "updateTime",column = "update_time"),
             @Result(property = "category",column = "category_id",

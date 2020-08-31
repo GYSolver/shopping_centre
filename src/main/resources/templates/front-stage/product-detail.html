@@ -72,10 +72,7 @@
                     <div class="breadcrumb_content">
                         <ul>
                             <li>
-                                <h1><a href="index.html">Home</a></h1>
-                            </li>
-                            <li>
-                                <h1><a href="shop.html">Shop</a></h1>
+                                <h1><a th:href="@{/}">Home</a></h1>
                             </li>
                             <li>Product Details</li>
                         </ul>
@@ -115,14 +112,14 @@
                         <div class="product-head">
                             <h1 class="product-title" th:text="${product.getName()}"></h1>
                         </div>
-                        <div class="rating-meta d-flex">
-                            <!--<div class="rating">
+                        <!--<div class="rating-meta d-flex">
+                            <div class="rating">
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
                                 <span class="yellow"><i class="fa fa-star"></i></span>
-                            </div>-->
+                            </div>
                             <ul class="meta d-flex">
                                 <li>
                                     <a href="#"><i class="fa fa-commenting-o"></i>Read reviews(3)</a>
@@ -131,12 +128,12 @@
                                     <a href="#"><i class="fa fa-edit"></i>Write a review</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>-->
                         <div class="price-box">
                             <span id="price" class="regular-price" th:text="'£'+${productSpecifications.get(0).getPrice()}"></span>
                         </div>
                         <div class="product-description">
-                            <p th:text="${product.getBrand()}"></p>
+                            <span><b>Brand: </b><span th:text="${product.getBrand()}"></span></span>
                         </div>
 
                         <div class="product-packeges">
@@ -163,9 +160,9 @@
                                 </div>
                                 <div class="form-group product-buttons grid_list">
                                     <div class="action-link">
-                                        <a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>
+                                        <!--<a class="compare-add same-link" href="compare.html" title="Add to compare"><i class="zmdi zmdi-refresh-alt"></i></a>-->
                                         <button type="submit" class="btn-secondary">Add To Cart</button>
-                                        <a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>
+                                        <!--<a class="wishlist-add same-link" href="wishlist.html" title="Add to wishlist"><i class="zmdi zmdi-favorite-outline zmdi-hc-fw"></i></a>-->
                                     </div>
                                 </div>
                             </form>
@@ -193,7 +190,7 @@
                             <div class="product_description_wrap mt-20">
                                 <div class="product_desc">
                                     <h2 class="last-title mb-20">Details</h2>
-                                    <p></p>
+                                    <p th:text="${product.getDetail()}"></p>
                                 </div>
                                 <!--<div class="pro__feature mt-20">
                                     <h2 class="last-title mb-20">Features</h2>
@@ -222,107 +219,30 @@
                         <!-- End Single Content -->
                         <!-- Start Single Content -->
                         <div role="tabpanel" id="reviews" class="product_tab_content fade">
-                            <div class="review_address_inner mt-20">
+                            <div class="review_address_inner mt-20"  th:each="review:${reviews}">
                                 <!-- Start Single Review -->
                                 <div class="pro_review">
-                                    <div class="review_thumb">
+                                    <!--<div class="review_thumb">
                                         <img src="front-stage/images/blog/comment/comment-3.jpg" alt="review images">
-                                    </div>
+                                    </div>-->
                                     <div class="review_details">
                                         <div class="review_info">
-                                            <a class="last-title" href="#">Gerald Barnes</a>
-                                            <div class="rating">
+                                            <a class="last-title" href="#" th:text="${review.getGeneralReview()}"></a>
+                                            <div class="rating" th:each="i:${#numbers.sequence(1, review.getRating())}">
                                                 <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                            </div>
-                                            <div class="rating_send">
-                                                <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
                                             </div>
                                         </div>
                                         <div class="review_date">
-                                            <span>27 Jun, 2016 at 2:30pm</span>
+                                            <p><b>Member: </b> <span th:text="${review.getUsername()}"></span></p>
+                                            <p><b>Specification: </b> <span th:text="${review.getProductSpecification()}"></span></p>
+                                           <p><b>Create Time: </b> <span th:text="${review.getCreateTime()}"></span></p>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Review -->
-                                <!-- Start Single Review -->
-                                <div class="pro_review pro-second">
-                                    <div class="review_thumb">
-                                        <img src="front-stage/images/blog/comment/comment-3.jpg" alt="review images">
-                                    </div>
-                                    <div class="review_details">
-                                        <div class="review_info">
-                                            <a class="last-title" href="#">Gerald Barnes</a>
-                                            <div class="rating">
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                                <span class="yellow"><i class="fa fa-star"></i></span>
-                                            </div>
-                                            <div class="rating_send">
-                                                <a href="#"><i class="zmdi zmdi-mail-reply"></i></a>
-                                                <a href="#"><i class="zmdi zmdi-close"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="review_date">
-                                            <span>27 Jun, 2016 at 2:30pm</span>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                        <p th:text="${review.getDetailedReview()}"></p>
                                     </div>
                                 </div>
                                 <!-- End Single Review -->
                             </div>
-                            <!-- Start RAting Area -->
-                            <div class="rating_wrap mt-20">
-                                <h4 class="last-title">Your Rating</h4>
-                                <div class="rating_list mt-20">
-                                    <!-- Start Single List -->
-                                    <div class="rating">
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                    </div>
-                                    <div class="rating">
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                        <span class="yellow"><i class="fa fa-star"></i></span>
-                                    </div>
-                                    <!-- End Single List -->
-                                </div>
-                            </div>
-                            <!-- End RAting Area -->
-                            <div class="comments_form">
-                                <h3>Leave a Reply </h3>
-                                <p>Your email address will not be published. Required fields are marked *</p>
-                                <form action="#">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <label for="review_comment">Comment </label>
-                                            <textarea name="comment" id="review_comment" spellcheck="false" data-gramm="false"></textarea>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <label for="author">Name</label>
-                                            <input id="author" type="text">
 
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <label for="email">Email </label>
-                                            <input id="email" type="text">
-                                        </div>
-                                    </div>
-                                    <button class="button" type="submit">Post Comment</button>
-                                </form>
-                            </div>
                         </div>
                         <!-- End Single Content -->
                     </div>
