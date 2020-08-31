@@ -55,7 +55,9 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String onPostAdd(Product product, int[] specificationId, int[] price, int[] stock, @RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+    public String onPostAdd(Product product, int[] specificationId, int[] price, int[] stock,
+                            @RequestParam("file") MultipartFile file, HttpServletRequest request)
+            throws IOException {
         if(product!=null&&product.getName()!=null&&price!=null&&stock!=null){
             //store image
             //String path = request.getServletContext().getRealPath("/");

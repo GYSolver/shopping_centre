@@ -77,9 +77,9 @@
                                     <img style="height: 80px; width: 80px;" src="/dashboard/images/avatar-1.jpg" id="displayImg" alt="image"/>
                                     <!--</div>-->
                                 </div>
-                                <div class="form-group col-12 col-lg-12">
+                                <div class="form-grou">
                                     <label for="Detail">Detail</label>
-                                    <textarea name="detail" id="Detail" spellcheck="false" data-gramm="false" ></textarea>
+                                    <textarea class="form-control" name="detail" id="Detail" spellcheck="false" data-gramm="false" ></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputCategory">Category</label>
@@ -211,9 +211,7 @@
     //add specification
     function createSpecificationRow(hasDeleteBtn){
         var content='';
-
         content+='<div><hr>Specification ' + count+'<div class="form-row">';
-
         for (var i = 0;i<specifications.length;i++) {
             var selector="specification"+count;
             content+=

@@ -30,7 +30,7 @@ public class UserRealm extends AuthorizingRealm {
             return null; //no such username
         }
         else{
-            System.out.println(user);
+            //System.out.println(user);
             String password = user.getPassword(); //query password
             ByteSource bsSalt=  ByteSource.Util.bytes(user.getSalt());//query salt
             return new SimpleAuthenticationInfo(user,password,bsSalt,getName());
@@ -40,7 +40,7 @@ public class UserRealm extends AuthorizingRealm {
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        System.out.println("authorization");
+        //System.out.println("authorization");
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Subject subject = SecurityUtils.getSubject();

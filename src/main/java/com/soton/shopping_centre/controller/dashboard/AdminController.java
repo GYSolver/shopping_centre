@@ -21,8 +21,8 @@ public class AdminController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/")
-    public String onGetDashboard(){ return "/dashboard/index"; }
+    /*@GetMapping("/")
+    public String onGetDashboard(){ return "/dashboard/index"; }*/
 
     @PostMapping("/register-admin")
     public String onPostRegisterAdmin(){
