@@ -61,7 +61,6 @@ public class CartController {
                 }
             }
         }
-
         //if has logged in:
         //      if has products in cookie, put them in db and clean cookie,finally query from db;
         //else: use products from cookie;
@@ -95,6 +94,7 @@ public class CartController {
 
            carts = cartService.queryCartsByUserId(user.getId());
         }
+
         model.addAttribute("carts",carts);
         return "/front-stage/cart";
     }

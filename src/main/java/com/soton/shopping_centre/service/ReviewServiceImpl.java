@@ -25,6 +25,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<Review> queryReviewByUserId(Integer userId) {
+        QueryWrapper<Review> wrapper = new QueryWrapper<>();
+        wrapper.eq("user_id",userId);
+        List<Review> reviews = reviewMapper.selectList(wrapper);
+        return reviews;
+    }
+
+    @Override
     public List<Review> queryReviewsByProductId(Integer productId) {
         QueryWrapper<Review> wrapper = new QueryWrapper<>();
         wrapper.eq("product_id",productId);
@@ -37,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public int deleteReviewById(Integer id) {
-        return 0;
+        return reviewMapper.deleteById(id);
     }
 
     @Override

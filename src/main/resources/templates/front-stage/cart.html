@@ -148,6 +148,7 @@
                                                 <p  class="cart-amount">£<span id="total"></span></p>
                                             </div>
                                             <div class="checkout-btn">
+                                                <p style="color: red;" th:text="${err}"></p>
                                                 <a th:href="@{/checkout}">Checkout</a>
                                             </div>
                                         </div>

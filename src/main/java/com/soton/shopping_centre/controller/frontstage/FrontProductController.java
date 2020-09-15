@@ -32,10 +32,11 @@ public class FrontProductController {
     ReviewService reviewService;
 
     @GetMapping("/")
-    public String onGetIndex(String[] selectedCategory,String range, Model model){
+    public String onGetIndex(String[] selectedCategory,String range1,String range2, Integer categoryId, String searchText,Model model){
         List<Product> products = productService.queryAllProducts();
+        List<String> categoryList = new ArrayList<>();
         if(selectedCategory!=null){
-            List<String> categoryList = new ArrayList<>(Arrays.asList(selectedCategory));
+            categoryList = new ArrayList<>(Arrays.asList(selectedCategory));
             Iterator<Product> iterator = products.iterator();
             while(iterator.hasNext()){
                 Product product = iterator.next();
@@ -44,8 +45,8 @@ public class FrontProductController {
                 }
             }
         }
-        if(range!=null){
-            String a = range.substring(1,range.length());
+        if(range1!=null && range2!=null ){
+            /*String a = range.substring(1,range.length());
             String left="",right="";
             for(int i=0;i<a.length();i++){
                 if(a.charAt(i)==' '){
@@ -54,8 +55,16 @@ public class FrontProductController {
                     break;
                 }
             }
-            int l=Integer.parseInt(left),r=Integer.parseInt(right);
-
+            int l=Integer.parseInt(left),r=Integer.parseInt(right);*/
+            if(range1.equals(""))
+                range1="0";
+            if(range2.equals(""))
+                range2="0";
+            int l=Integer.parseInt(range1),r=Integer.parseInt(range2);
+            if(l<0) l=0;
+            if(l>1000) l=1000;
+            if(r<0) r=0;
+            if(r>1000) r=1000;
             Iterator<Product> iterator = products.iterator();
             while(iterator.hasNext()){
                 Product product = iterator.next();
@@ -66,15 +75,22 @@ public class FrontProductController {
             }
         }
 
+        if(searchText!=null&&!searchText.equals("")){
+            products = productService.queryProductsByCategoryIdAndProductName(categoryId, searchText);
+        }
+
         model.addAttribute("products",products);
-
-
         List<Category> categories = categoryService.queryAllCategories();
         model.addAttribute("categories",categories);
+
+        model.addAttribute("categoryList",categoryList);
+        model.addAttribute("range1",range1);
+        model.addAttribute("range2",range2);
+
         return "/front-stage/index";
     }
 
-    @GetMapping("/search")
+    /*@GetMapping("/search")
     public String onGetProductSearch(Integer categoryId, String searchText, Model model){
         List<Category> categories = categoryService.queryAllCategories();
         model.addAttribute("categories",categories);
@@ -82,7 +98,7 @@ public class FrontProductController {
         List<Product> products = productService.queryProductsByCategoryIdAndProductName(categoryId, searchText);
         model.addAttribute("products",products);
         return "/front-stage/index";
-    }
+    }*/
 
     @GetMapping("/product-detail/{productId}")
     public String OnGetProductDetailIndex(@PathVariable Integer productId, Model model){

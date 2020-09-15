@@ -102,7 +102,7 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="search-container">
-                            <form th:method="get" th:action="@{/search}">
+                            <form th:method="get" th:action="@{/}">
                                 <div class="top-cat">
                                     <select class="select-option" name="categoryId" id="category2">
                                         <option value="0">All categories</option>
@@ -110,7 +110,7 @@
                                     </select>
                                 </div>
                                 <div class="search_box">
-                                    <input class="header-search" name="searchText" placeholder="Enter your search key ..." type="text">
+                                    <input class="header-search" name="searchText" placeholder="Enter your search value ..." type="text">
                                     <button class="header-search-button" type="submit">Search</button>
                                 </div>
                             </form>
@@ -132,7 +132,7 @@
                             <li>
                                 <h1><a th:href="@{/}">Home</a></h1>
                             </li>
-                            <li>Shop</li>
+                            <!--<li>Shop</li>-->
                         </ul>
                     </div>
                 </div>
@@ -158,27 +158,30 @@
                             </ul>
                         </div>
                         <div class="widget_inner widget-background mt-50">
-                            <div class="widget_list widget_filter">
+                            <!--<div class="widget_list widget_filter">-->
+                            <div class="widget_list">
                                 <div class="sidebar-title">
                                     <h4 class="title-shop">Filter by Price</h4>
                                 </div>
                                 <form th:action="@{/}" method="get">
-                                    <div id="slider-range"></div>
-                                    <button type="submit">Filter</button>
-                                    <input type="text" name="range" id="amount" />
+                                    <!--<div id="slider-range"></div>-->
+                                    £<input size="4" type="text" name="range1" th:value="${range1}" min="0" max="1000"> - £<input size="4" type="text" name="range2" th:value="${range2}"min="0" max="1000">
+                                    <button class="btn-info" type="submit">Filter</button>
+                                    <!--<input type="text" name="range" id="amount" th:value="${range}"/>-->
                                 </form>
                             </div>
-                            <div class="widget_list widget_filter widget_categories mt-20">
+                            <!--<div class="widget_list widget_filter widget_categories mt-20">-->
+                            <div class="widget_list">
                                 <div class="sidebar-title">
-                                    <h4 class="title-shop">Categories</h4>
+                                    <h4 class="title-shop">Filter by Categories</h4>
                                 </div>
                                 <form th:action="@{/}" method="get">
                                     <ul th:each="category:${categories}">
                                         <li>
-                                            <input type="checkbox" name="selectedCategory" th:text="${category.getName()}" th:value="${category.getName()}">
+                                            <input class="checkbox" type="checkbox" name="selectedCategory" th:text="${category.getName()}" th:value="${category.getName()}" th:checked="${categoryList.contains(category.getName())}?true:false">
                                         </li>
                                     </ul>
-                                    <button type="submit">Filter</button>
+                                    <button class="btn-info" type="submit">Filter</button>
                                 </form>
                             </div>
                         </div>
@@ -206,9 +209,9 @@
                         </div>
                         <div class="nice-select select-option">
                             <select name="select">
-                                <option value="1">Short By Name</option>
-                                <option value="3">Short By Date</option>
-                                <option value="5">Short By Category</option>
+                                <option value="1">Sort By Name</option>
+                                <option value="3">Sort By Date</option>
+                                <option value="5">Sort By Category</option>
                             </select>
                         </div>
                     </div>

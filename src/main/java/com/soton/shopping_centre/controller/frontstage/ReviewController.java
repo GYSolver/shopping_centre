@@ -25,9 +25,16 @@ public class ReviewController {
 
     @GetMapping("/")
     public String onGetIndex(Model model){
-        List<Review> reviews = reviewService.queryAllReviews();
-        model.addAttribute("reviews",reviews);
-        return "/dashboard/review/index";
+        //get current user
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        if(user!=null){
+            List<Review> reviews = reviewService.queryReviewByUserId(user.getId());
+            model.addAttribute("reviews",reviews);
+            return "/front-stage/my-reviews";
+        }
+        else
+            return "/front-stage/unauthorized";
     }
 
     @GetMapping("/add/{orderDetailId}")
@@ -35,6 +42,19 @@ public class ReviewController {
         OrderDetail orderDetail = orderDetailService.queryOrderDetailById(orderDetailId);
         model.addAttribute("orderDetail",orderDetail);
         return "/front-stage/add-review";
+    }
+    @PostMapping("/delete/{id}")
+    public String onPostDeleteOrder(@PathVariable Integer id,Model model){
+        //get current user
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        if(user!=null){
+            reviewService.deleteReviewById(id);
+            return "redirect:/";
+        }
+        else
+            return "/front-stage/unauthorized";
+
     }
 
     @PostMapping("/add")

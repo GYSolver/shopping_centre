@@ -74,21 +74,31 @@
             <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="checkout_info">
                     <form class="form-row" th:method="post" th:action="@{/review/add}">
-                        <h3 class="last-title">Add a Review for This Item:</h3>
+                        <div class="form_group col-12 col-lg-12">
+                            <h3 class="last-title">Add a Review for This Item:</h3>
+                        </div>
                         <input class="input-form" name="id" th:value="${orderDetail.getId()}" type="text" hidden>
                         <input class="input-form" name="orderId" th:value="${orderDetail.getOrderId()}" type="text" hidden>
                         <input class="input-form" name="productId" th:value="${orderDetail.getProductId()}" type="text" hidden>
-                        <div class="form_group col-12 col-lg-12">
+                        <div class="form_group col-12 col-lg-6">
                             <label class="form-label">Product Name</label>
                             <input class="input-form" name="productName" th:value="${orderDetail.getProductName()}" type="text" readonly="">
                         </div>
-                        <div class="form_group col-12 col-lg-12">
+                        <div class="form_group col-12 col-lg-6">
                             <label class="form-label">Product Specification</label>
                             <input class="input-form" name="productSpecification" th:value="${orderDetail.getProductSpecification()}" type="text" readonly="">
                         </div>
                         <div class="form_group col-12 col-lg-6">
-                            <label class="form-label">Rating</label>
-                            <select class="niceselect-option nice-select select-option" name="rating" id="rating">
+                            <label class="form-label">Quantity</label>
+                            <input class="input-form" name="1uantity" th:value="${orderDetail.getQuantity()}" type="text" readonly="">
+                        </div>
+                        <div class="form_group col-12 col-lg-6">
+                            <label class="form-label">Purchase Time</label>
+                            <input class="input-form" name="purchaseTime" th:value="${orderDetail.getCreateTime()}" type="text" readonly="">
+                        </div>
+                        <div class="form_group col-12 col-lg-6">
+                            <label class="form-label">Rating*</label>
+                            <select class="niceselect-option nice-select select-option" name="rating" id="rating" required>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -97,17 +107,17 @@
                             </select>
                         </div>
                         <div class="form_group col-12 col-lg-6">
-                            <label class="form-label">General Review</label>
-                            <input class="input-form" name="generalReview" type="text">
+                            <label class="form-label">General Review*</label>
+                            <input class="input-form" name="generalReview" type="text" required>
                         </div>
                         <div class="form_group col-12 col-lg-12">
-                            <label class="form-label" for="detailedReview">Detailed Review </label>
-                            <textarea class="form-control" name="detailedReview" id="detailedReview" spellcheck="false" data-gramm="false" ></textarea>
+                            <label class="form-label" for="detailedReview">Detailed Review*</label>
+                            <textarea class="form-control" name="detailedReview" id="detailedReview" spellcheck="false" data-gramm="false" required></textarea>
                         </div>
 
 
                         <div class="form-row mt-20">
-                            <input type="submit" class="btn-secondary" value="Update">
+                            <input type="submit" class="btn-secondary" value="Submit">
                             <button class="btn btn-space btn-info" onclick="history.back(-1);return false;">Cancel</button>
                         </div>
                     </form>

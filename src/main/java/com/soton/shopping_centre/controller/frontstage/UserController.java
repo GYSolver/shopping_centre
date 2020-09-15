@@ -101,9 +101,9 @@ public class UserController {
         if(!addrDb.equals(""))
             addr = objectMapper.readValue(addrDb, String[].class);
         else
-            addr = new String[6];
-
+            addr = new String[5];
         model.addAttribute("addr",addr);
+
         return "/front-stage/my-account";
     }
 
@@ -118,6 +118,7 @@ public class UserController {
         userShiro.setFirstName(user.getFirstName());
         userShiro.setLastName(user.getLastName());
         userShiro.setAddress(user.getAddress());
+        userShiro.setPostcode(user.getPostcode());
         return "redirect:/my-account";
     }
 

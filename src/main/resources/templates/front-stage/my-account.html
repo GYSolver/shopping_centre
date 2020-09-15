@@ -213,7 +213,7 @@
                                     </div>
                                     <div class="form_group col-12">
                                         <label class="form-label">Postcode<span>*</span></label>
-                                        <input class="input-form" name="addr" th:value="${addr[5]}" type="text">
+                                        <input class="input-form" name="postcode" th:value="${user.getPostcode()}" type="text">
                                     </div>
                                     <div class="form-row mt-20">
                                         <input type="submit" class="btn-secondary" value="Update">

@@ -45,6 +45,7 @@ public class ShiroConfig {
         bean.setSecurityManager(securityManager);
 
         Map<String,String> filterMap = new LinkedHashMap<>();
+        filterMap.put("/dashboard/specification/**","anon");
         filterMap.put("/dashboard/**","roles[admin]");
 
         filterMap.put("/front-stage/checkout","roles[member]");

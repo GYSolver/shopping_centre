@@ -35,13 +35,29 @@ public class OrderController {
 
 
     @GetMapping("/checkout")
-    public String onGetCheckout(Model model){
+    public String onGetCheckout(Model model) throws JsonProcessingException {
         //get current user
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getPrincipal();
+        if(user==null){
+            return "redirect:/login";
+        }
         model.addAttribute("user",user);
 
+        //get addr
+        String addrDb = user.getAddress();
+        String[] addr;
+        if(!addrDb.equals(""))
+            addr = objectMapper.readValue(addrDb, String[].class);
+        else
+            addr = new String[5];
+        model.addAttribute("addr",addr);
+
         List<Cart> carts = cartService.queryCartsByUserId(user.getId());
+        if(carts.size()==0){
+            model.addAttribute("err","Please add products into cart!");
+            return "/front-stage/cart";
+        }
         //check stock
         boolean hasErr=false;
         Map<String,String> errMap=new HashMap<>();
@@ -66,6 +82,7 @@ public class OrderController {
             return "/front-stage/checkout";
         }
     }
+
     @PostMapping("/checkout")
     public String onPostCheckout(String[] addr,User user,Model model) throws JsonProcessingException {
         user.setAddress(objectMapper.writeValueAsString(addr));

@@ -80,59 +80,59 @@
                         <input class="input-form" name="id" th:value="${user.getId()}" type="text" hidden="">
                         <div class="form_group col-12">
                             <label class="form-label">Street Address <span>*</span></label>
-                            <input placeholder="House number and street name" name="addr" class="input-form" type="text">
+                            <input placeholder="House number and street name" name="addr" th:value="${addr[0]}" class="input-form" type="text" required>
                         </div>
                         <div class="form_group col-12">
-                            <input placeholder="Apartment, suite, unit etc. (optional)" name="addr" class="input-form" type="text">
+                            <input placeholder="Apartment, suite, unit etc. (optional)" name="addr" th:value="${addr[1]}" class="input-form" type="text" required>
                         </div>
                         <div class="form_group col-12">
                             <label class="form-label">Town / City <span>*</span></label>
-                            <input class="input-form" name="addr" type="text">
+                            <input class="input-form" name="addr" th:value="${addr[2]}" type="text" required>
                         </div>
                         <div class="form_group col-12">
                             <label class="form-label">State / County <span>*</span></label>
-                            <input class="input-form" name="addr" type="text">
+                            <input class="input-form" name="addr" th:value="${addr[3]}" type="text" required>
                         </div>
                         <div class="form_group col-12">
                             <label class="form-label" for="state">Country <span>*</span></label>
-                            <select class="niceselect-option nice-select select-option" name="addr" id="state">
-                                <option value="1">UK</option>
-                                <option value="2">China</option>
-                                <option value="3">US</option>
-                                <option value="4">Japan</option>
-                                <option value="5">Korea</option>
-                                <option value="6">Albania</option>
-                                <option value="7">Bahrain</option>
-                                <option value="8">Colombia</option>
-                                <option value="9">Dominican Republic</option>
+                            <select class="niceselect-option nice-select select-option" name="addr" id="state" required>
+                                <option value="1" th:selected="${addr[4]}=='1'">UK</option>
+                                <option value="2" th:selected="${addr[4]}=='2'">China</option>
+                                <option value="3" th:selected="${addr[4]}=='3'">US</option>
+                                <option value="4" th:selected="${addr[4]}=='4'">Japan</option>
+                                <option value="5" th:selected="${addr[4]}=='5'">Korea</option>
+                                <option value="6" th:selected="${addr[4]}=='6'">Albania</option>
+                                <option value="7" th:selected="${addr[4]}=='7'">Bahrain</option>
+                                <option value="8" th:selected="${addr[4]}=='8'">Colombia</option>
+                                <option value="9" th:selected="${addr[4]}=='9'">Dominican Republic</option>
                             </select>
                         </div>
                         <div class="form_group col-12">
                             <label class="form-label">Postcode<span>*</span></label>
-                            <input class="input-form" name="postcode" type="text">
+                            <input class="input-form" name="postcode"  th:value="${user.getPostcode()}" type="text" required>
                         </div>
                         <div class="form_group col-12 col-md-6">
                             <label class="form-label">First Name <span>*</span></label>
-                            <input class="input-form" name="firstName" th:value="${user.getFirstName()}" type="text">
+                            <input class="input-form" name="firstName" th:value="${user.getFirstName()}" type="text" required>
                         </div>
                         <div class="form_group col-12 col-md-6">
                             <label class="form-label">Last Name <span>*</span></label>
-                            <input class="input-form" name="lastName" th:value="${user.getLastName()}" type="text">
+                            <input class="input-form" name="lastName" th:value="${user.getLastName()}" type="text" required>
                         </div>
                         <div class="form_group col-12 col-md-6">
                             <label class="form-label">Phone <span>*</span></label>
-                            <input class="input-form" name="phoneNumber" th:value="${user.getPhoneNumber()}" type="text">
+                            <input class="input-form" name="phoneNumber" th:value="${user.getPhoneNumber()}" type="text" required>
                         </div>
                         <div class="form_group col-12 col-md-6">
                             <label class="form-label">Email Address <span>*</span></label>
-                            <input class="input-form" name="email" th:value="${user.getEmail()}" type="text">
+                            <input class="input-form" name="email" th:value="${user.getEmail()}" type="text" required>
                         </div>
                         <div class="form-group col-12">
                             <div class="form-check">
                                 <div class="custom-checkbox">
                                     <input class="form-check-input" type="checkbox" required="" id="agree-condition">
                                     <span class="checkmark"></span>
-                                    <label class="form-check-label" for="agree-condition">I agree to the <a href="#">terms of service</a> and will adhere to them unconditionally.</label>
+                                    <label class="form-check-label" for="agree-condition">I agree to the <a href="#">terms of service</a>.</label>
                                 </div>
                             </div>
                         </div>

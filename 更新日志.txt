@@ -90,6 +90,16 @@ v4.2
 1.整理后台页面
 2.修复后台授权bug
 
+9/1
+1.修复严重bug-filterMap.put("/dashboard/**","roles[admin]");会屏蔽商品详情中ajax查询spec的请求，返回login界面。解决：在filtermap中添加可anon访问spec控制器
+2.修复严重bug-购物车点击结账时，controller中没判断是否登录
+3.修复bug-修改用户信息不能同步显示postcode
 
+9/2
+1.修复bug-购物车没有商品时不应进入结账环节
+
+9/6
+1.新增评论订单与删除评论功能
+2.修复bug-过滤器过滤回显问题
 
 

@@ -125,26 +125,14 @@
 <script src="/dashboard/vendor/custom-js/jquery.multi-select.html"></script>
 <script src="/dashboard/libs/js/main-js.js"></script>
 <script>
-    function confirmDeleteProduct(id) {
+    function confirmDeleteOrder(id) {
         if (confirm("Confirm to delete?"))
         {
             $.ajax({
-                url: "/dashboard/product/delete/" + id,
+                url: "/delete-order/" + id,
                 type: "post",
                 success: function () {
-                    window.location.reload();
-                }
-            });
-        }
-    }
-    function confirmDeletePdctSpec(id) {
-        if (confirm("Confirm to delete?"))
-        {
-            $.ajax({
-                url: "/dashboard/pdctSpec/delete/" + id,
-                type: "post",
-                success: function () {
-                    window.location.reload();
+                    window.location.reload()
                 }
             });
         }

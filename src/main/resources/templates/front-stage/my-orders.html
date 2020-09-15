@@ -85,6 +85,7 @@
                                             <th>Total</th>
                                             <th>Delete</th>
                                             <th>Items</th>
+                                            <th><a class="btn btn-xs btn-info" th:href="@{/review/}">Reviews</a></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -103,7 +104,6 @@
                                                         <th>Specification</th>
                                                         <th>Price</th>
                                                         <th>Quantity</th>
-                                                        <th>Review</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -113,7 +113,7 @@
                                                         <td>£<span th:text="${orderDetail.getPrice()}"></span></td>
                                                         <td th:text="${orderDetail.getQuantity()}"></td>
                                                         <td>
-                                                            <a class="btn btn-xs btn-info" th:href="@{/review/add/}+${orderDetail.getId()}">add</a>
+                                                            <a class="btn btn-xs btn-primary" th:href="@{/review/add/}+${orderDetail.getId()}">add</a>
                                                         </td>
                                                     </tr>
                                                     </tbody>
